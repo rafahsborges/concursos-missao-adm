@@ -235,7 +235,7 @@ export default function Simulado() {
     const ss = String(restante % 60).padStart(2, '0');
     return (
       <div className="fade-in">
-        <div className="flex items-center justify-between border-b border-[var(--line)] pb-3 mb-4 sticky top-0 bg-[var(--paper)]">
+        <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[var(--line)] pb-3 mb-4 sticky top-0 bg-[var(--paper)]">
           <span className={`font-mono text-lg ${restante <= 300 ? 'font-bold' : ''}`} style={{ color: restante <= 300 ? 'var(--red)' : 'inherit' }}>
             {mm}:{ss}{restante <= 300 && ' — últimos 5 minutos'}
           </span>
@@ -287,7 +287,7 @@ export default function Simulado() {
         <p className="text-sm text-neutral-600 mb-6">
           Confira suas marcações antes de ver a correção. Em branco = questão sem resposta.
         </p>
-        <div className="grid grid-cols-5 gap-1 mb-6 max-w-lg">
+        <div className="grid grid-cols-4 sm:grid-cols-5 gap-1 mb-6 max-w-lg">
           {qs.map((q, i) => (
             <div key={q.id} className={`border border-[var(--line)] p-2 text-center ${resp[q.id] ? 'alt-marca' : ''}`}>
               <span className="block text-xs text-neutral-500">{i + 1}</span>

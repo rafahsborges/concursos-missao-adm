@@ -80,7 +80,7 @@ export default function Cronograma({ irBanco }: { irBanco: (concurso: string, di
               return (
                 <div
                   key={it.id}
-                  className={`flex items-center gap-3 border-b border-[var(--line)] py-2 ${feito ? 'opacity-50' : ''}`}
+                  className={`flex flex-wrap items-center gap-2 sm:gap-3 border-b border-[var(--line)] py-2 ${feito ? 'opacity-50' : ''}`}
                 >
                   <input
                     type="checkbox"

@@ -125,7 +125,7 @@ export default function Banco({ preset }: { preset?: { concurso: string; discipl
               }}
             ia={ia?.disponivel ? { disponivel: true, mostrarDica: !corrigida.has(q.id), mostrarExplicar: corrigida.has(q.id) } : undefined}
           />
-          <div className="flex gap-3">
+          <div className="flex gap-3 flex-wrap">
             <button
               disabled={!prog.respostas[q.id] || corrigida.has(q.id)}
               className="btn-ink"

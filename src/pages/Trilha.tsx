@@ -10,7 +10,7 @@ export default function Trilha() {
           <h3 className="font-prova text-xl font-semibold border-b border-[var(--line)] pb-2 mb-3">
             {c.nome} <span className="eyebrow ml-2">{c.banca}</span>
           </h3>
-          <table className="w-full text-sm">
+          <div className="overflow-x-auto"><table className="w-full text-sm min-w-[560px]">
             <tbody>
               {c.disciplinas.map((d) => (
                 <tr key={d.nome} className="border-b border-[var(--line)]">
@@ -20,7 +20,7 @@ export default function Trilha() {
                 </tr>
               ))}
             </tbody>
-          </table>
+          </table></div>
           <p className="text-xs mt-2 text-neutral-500">Formato: {c.formato} · Pontuação: {c.regra}</p>
         </section>
       ))}

@@ -22,7 +22,7 @@ export default function App() {
   return (
     <div className="min-h-screen">
       <Sidebar modulo={modulo} ir={setModulo} />
-      <main className="ml-60 px-10 py-8 max-w-4xl">
+      <main className="px-4 sm:px-6 md:ml-60 md:px-10 py-6 md:py-8 max-w-4xl">
         {modulo === 'inicio' && <Inicio ir={setModulo} />}
         {modulo === 'trilha' && <Trilha />}
         {modulo === 'cronograma' && (
