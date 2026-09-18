@@ -1,0 +1,40 @@
+{
+ "id": "lingua-inglesa",
+ "titulo": "Língua Inglesa",
+ "concursos": [
+  "Banco do Brasil 2023"
+ ],
+ "paginas": {},
+ "ordem": {},
+ "secoes": [
+  {
+   "titulo": "Orientações de estudo",
+   "paragrafos": [
+    "No concurso do Banco do Brasil (Cesgranrio, questões 11–15) a cobrança é de interpretação de texto, com vocabulário frequentemente ligado ao mundo financeiro e corporativo.",
+    "Estude por leitura ativa: sublinhe ideia principal, tom do autor e referentes; monte um mini-glossário de termos bancários em inglês."
+   ]
+  },
+  {
+   "titulo": "Kultivi — cursos gratuitos de inglês",
+   "paragrafos": [
+    "Plataforma com cursos de inglês 100% gratuitos e certificado, do básico ao intermediário — útil para revisar vocabulário e compreensão textual.",
+    "https://kultivi.com"
+   ]
+  },
+  {
+   "titulo": "Cursa — cursos gratuitos com certificado",
+   "paragrafos": [
+    "Na seção de idiomas há cursos de inglês com exercícios de compreensão e vocabulário, acessíveis pelo aplicativo.",
+    "https://cursa.app/cursos-online-preparatorio-concursos-gratuito"
+   ]
+  },
+  {
+   "titulo": "Questões reais do banco (105 questões de BB no sistema)",
+   "paragrafos": [
+    "As provas A, B e C de 2023 têm 15 questões de inglês cada (questões 11–15). Resolver com gabarito oficial é o treino mais fiel para esta disciplina.",
+    "use o módulo Banco de questões deste sistema, filtrando Conhecimentos = Banco do Brasil 2023 / Língua Inglesa"
+   ]
+  }
+ ],
+ "complementos": []
+}

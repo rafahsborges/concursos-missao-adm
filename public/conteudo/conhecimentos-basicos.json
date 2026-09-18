@@ -1,0 +1,41 @@
+{
+ "id": "conhecimentos-basicos",
+ "titulo": "Conhecimentos Básicos",
+ "concursos": [
+  "EBSERH 2024/2025",
+  "INSS 2022"
+ ],
+ "paginas": {},
+ "ordem": {},
+ "secoes": [
+  {
+   "titulo": "Orientações de estudo",
+   "paragrafos": [
+    "Bloco de 50 itens do INSS (Cebraspe) e de 30 questões da EBSERH (FGV): Língua Portuguesa, Raciocínio Lógico/Matemática, Informática e Atualidades. No INSS os itens 1–5 são ancorados em texto-base.",
+    "No estilo Cebraspe, treine julgar itens Certo/Errado com base literal nos textos; no estilo FGV, priorize interpretação e cálculo contextualizado."
+   ]
+  },
+  {
+   "titulo": "Manual Preparatório INSS — Grupo Focus (SlideShare)",
+   "paragrafos": [
+    "Cobre todas as disciplinas de básicos do INSS (português, raciocínio lógico, informática) com questões comentadas. Leitura gratuita online.",
+    "https://pt.slideshare.net/slideshow/inss-tcnico-do-seguro-social-grtis/103432249"
+   ]
+  },
+  {
+   "titulo": "Cursa — preparatório gratuito para o INSS",
+   "paragrafos": [
+    "Trilha gratuita com videoaulas e exercícios das disciplinas de básicos, com certificado.",
+    "https://cursa.app/cursos-online-preparatorio-concursos-gratuito"
+   ]
+  },
+  {
+   "titulo": "Apostila de conhecimentos gerais (ISCOM — PDF gratuito)",
+   "paragrafos": [
+    "Apostila resumida e gratuita com português, matemática, raciocínio lógico, informática, legislação e atualidades.",
+    "https://iscom.com.br/wp-content/uploads/2026/02/amostracg.pdf"
+   ]
+  }
+ ],
+ "complementos": []
+}

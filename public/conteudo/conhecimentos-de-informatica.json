@@ -1,0 +1,40 @@
+{
+ "id": "conhecimentos-de-informatica",
+ "titulo": "Conhecimentos de Informática",
+ "concursos": [
+  "Banco do Brasil 2023"
+ ],
+ "paginas": {},
+ "ordem": {},
+ "secoes": [
+  {
+   "titulo": "Orientações de estudo",
+   "paragrafos": [
+    "Bloco de maior peso do BB (questões 41–55) e presente nos básicos do INSS e da EBSERH: atalhos de Office/LibreOffice, navegadores, redes, segurança e ferramentas digitais.",
+    "A Cesgranrio cobra muito atalho e tela de programas; a Cebraspe cobra conceitos. Monte uma tabela de atalhos e revise-a nas revisões espaçadas do cronograma."
+   ]
+  },
+  {
+   "titulo": "Manual Preparatório INSS — Grupo Focus (SlideShare)",
+   "paragrafos": [
+    "Capítulo de Noções de Informática com 100+ páginas: redes, navegadores, e-mail e LibreOffice, com exercícios gabaritados.",
+    "https://pt.slideshare.net/slideshow/inss-tcnico-do-seguro-social-grtis/103432249"
+   ]
+  },
+  {
+   "titulo": "Kultivi — curso gratuito de Excel",
+   "paragrafos": [
+    "Curso 100% gratuito e com certificado de Excel (planilhas, gráficos, fórmulas) — cobrado em todas as bancas.",
+    "https://kultivi.com/blog/cursos-online-gratuitos-com-certificado"
+   ]
+  },
+  {
+   "titulo": "Cursa — cursos gratuitos de informática para concursos",
+   "paragrafos": [
+    "Trilhas de informática com exercícios, atualizadas para os editais recentes.",
+    "https://cursa.app/cursos-online-preparatorio-concursos-gratuito"
+   ]
+  }
+ ],
+ "complementos": []
+}

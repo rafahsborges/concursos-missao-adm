@@ -1,0 +1,70 @@
+{
+ "id": "conhecimentos-especificos",
+ "titulo": "Conhecimentos Específicos",
+ "concursos": [
+  "EBSERH 2024/2025",
+  "INSS 2022",
+  "TJDFT 2022"
+ ],
+ "paginas": {},
+ "ordem": {},
+ "secoes": [
+  {
+   "titulo": "Orientações de estudo",
+   "paragrafos": [
+    "Para o INSS (Cebraspe, itens 51–120): Direito Previdenciário (maior fatia), Direito Administrativo e Direito Constitucional — lei seca atualizada é indispensável. Para a EBSERH (FGV): Administração Pública, Direito Administrativo (Lei 8.112 e Lei 14.133) e Administração da Saúde/SUS.",
+    "Estude sempre da fonte oficial (Planalto) e confirme atualizações legislativas próximas à prova."
+   ]
+  },
+  {
+   "titulo": "Estratégia — Resumos gratuitos para o INSS",
+   "paragrafos": [
+    "Resumos gratuitos em PDF de Direito Constitucional, Direito Administrativo e Direito Previdenciário para o concurso do INSS.",
+    "https://www.estrategiaconcursos.com.br/blog/34763-2/"
+   ]
+  },
+  {
+   "titulo": "Lei 8.213/91 (Planalto, texto consolidado)",
+   "paragrafos": [
+    "Lei orgânica da Previdência Social — fonte primária obrigatória para o bloco previdenciário do INSS.",
+    "https://www.planalto.gov.br/ccivil_03/leis/l8213/consolide.htm"
+   ]
+  },
+  {
+   "titulo": "Decreto 3.048/99 (Planalto, texto consolidado)",
+   "paragrafos": [
+    "Regulamento da Previdência Social: benefícios, filas, carências e requisitos — cobrado item a item pela Cebraspe.",
+    "https://www.planalto.gov.br/ccivil_03/decreto/d3048.htm"
+   ]
+  },
+  {
+   "titulo": "Constituição Federal (Planalto)",
+   "paragrafos": [
+    "Texto constitucional oficial — arts. 37, 194 a 204 são os mais cobrados neste bloco.",
+    "https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm"
+   ]
+  },
+  {
+   "titulo": "Lei 8.112/90 (Planalto, texto consolidado)",
+   "paragrafos": [
+    "Estatuto dos Servidores — base do Direito Administrativo cobrado no INSS e na EBSERH.",
+    "https://www.planalto.gov.br/ccivil_03/leis/l8112/consolide.htm"
+   ]
+  },
+  {
+   "titulo": "Lei 12.550/2011 — EBSERH (Planalto)",
+   "paragrafos": [
+    "Lei de criação da EBSERH: finalidade, competências, contratos com HUs — fonte primária do bloco específico.",
+    "https://www.planalto.gov.br/ccivil_03/_ato2011-2014/2011/lei/l12550.htm"
+   ]
+  },
+  {
+   "titulo": "Decreto 7.661/2011 — Estatuto Social da EBSERH (Planalto)",
+   "paragrafos": [
+    "Estatuto oficial da empresa: órgãos de administração, diretoria e conselhos.",
+    "http://www.planalto.gov.br/ccivil_03/_ato2011-2014/2011/decreto/D7661.htm"
+   ]
+  }
+ ],
+ "complementos": []
+}

@@ -1,0 +1,40 @@
+{
+ "id": "matematica",
+ "titulo": "Matemática",
+ "concursos": [
+  "Banco do Brasil 2023"
+ ],
+ "paginas": {},
+ "ordem": {},
+ "secoes": [
+  {
+   "titulo": "Orientações de estudo",
+   "paragrafos": [
+    "Para INSS, BB e EBSERH o núcleo é o mesmo: razão e proporção, regra de três, porcentagem, juros simples e noções de estatística. A FGV ainda cobra análise combinatória básica.",
+    "Resolva as questões do banco por bloco de assunto e mantenha uma folha de fórmulas para revisão espaçada."
+   ]
+  },
+  {
+   "titulo": "Kultivi — Matemática Viva para Concursos",
+   "paragrafos": [
+    "Curso 100% gratuito que parte do zero: conjuntos numéricos, frações, porcentagem e regra de três, com didática leve e exemplos de prova.",
+    "https://kultivi.com/curso/matematica-viva"
+   ]
+  },
+  {
+   "titulo": "Manual Preparatório INSS — Grupo Focus (SlideShare)",
+   "paragrafos": [
+    "Capítulo de Raciocínio Lógico e Matemática com exercícios e gabarito comentado, gratuito para leitura online.",
+    "https://pt.slideshare.net/slideshow/inss-tcnico-do-seguro-social-grtis/103432249"
+   ]
+  },
+  {
+   "titulo": "Apostila 1.200 questões Banco do Brasil (Academia.edu)",
+   "paragrafos": [
+    "Coleção gratuita de questões comentadas de matemática e matemática financeira de provas anteriores do BB.",
+    "https://www.academia.edu/96734269/APOSTILA_1200_QUEST%C3%95ES_PARA_CONCURSO_BANCO_DO_BRASIL"
+   ]
+  }
+ ],
+ "complementos": []
+}

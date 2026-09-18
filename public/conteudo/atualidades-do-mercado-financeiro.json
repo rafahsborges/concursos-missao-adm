@@ -1,0 +1,40 @@
+{
+ "id": "atualidades-do-mercado-financeiro",
+ "titulo": "Atualidades do Mercado Financeiro",
+ "concursos": [
+  "Banco do Brasil 2023"
+ ],
+ "paginas": {},
+ "ordem": {},
+ "secoes": [
+  {
+   "titulo": "Orientações de estudo",
+   "paragrafos": [
+    "Cobrança de conhecimentos gerais do SFN, do papel do Banco Central e de produtos bancários (Cesgranrio, questões 21–25). A FGV/EBSERH cobra atualidades de saúde pública.",
+    "Acompanhe notícias do BC e leia os materiais de educação financeira do próprio Banco Central — a fonte primária é gratuita e oficial."
+   ]
+  },
+  {
+   "titulo": "Banco Central — portal de Cidadania Financeira",
+   "paragrafos": [
+    "Página oficial do BC com cartilhas, cadernos e jogos sobre SFN, inflação, juros e Pix — conteúdo primário e atualizado.",
+    "https://www.bcb.gov.br/cidadaniafinanceira"
+   ]
+  },
+  {
+   "titulo": "Febraban — Guia de Boas Práticas de Educação Financeira (PDF)",
+   "paragrafos": [
+    "Guia gratuito da federação dos bancos com conceitos do sistema financeiro e de produtos bancários.",
+    "https://cmsarquivos.febraban.org.br/Arquivos/documentos/PDF/febraban-guia%20de%20boas%20pr%C3%A1ticas-v7-web.pdf"
+   ]
+  },
+  {
+   "titulo": "Curso grátis de Conhecimentos Bancários (Online Cursos Gratuitos)",
+   "paragrafos": [
+    "14 módulos gratuitos cobrindo SFN, CMN, BACEN, SPB e produtos bancários — o mesmo núcleo de Atualidades.",
+    "https://onlinecursosgratuitos.com.br/curso/contabilidade-e-financas/conhecimentos-bancarios"
+   ]
+  }
+ ],
+ "complementos": []
+}

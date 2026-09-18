@@ -1,0 +1,48 @@
+{
+ "id": "lingua-portuguesa",
+ "titulo": "Língua Portuguesa",
+ "concursos": [
+  "Banco do Brasil 2023",
+  "TJDFT 2022"
+ ],
+ "paginas": {},
+ "ordem": {},
+ "secoes": [
+  {
+   "titulo": "Orientações de estudo",
+   "paragrafos": [
+    "Estude por assunto (fonética, acentuação, morfologia, sintaxe, interpretação) e resolva questões da banca logo após cada bloco: Cebraspe cobra literalidade do texto-base, Cesgranrio adora reescrita de frases e FGV cobra pontuação com rigor.",
+    "Priorize interpretação de texto e gramática aplicada: nas 810 questões do banco há dezenas de itens desta disciplina para consolidar cada tópico."
+   ]
+  },
+  {
+   "titulo": "Kultivi — Português para Concursos (curso 100% gratuito)",
+   "paragrafos": [
+    "Videoaulas de ortografia, acentuação e emprego de S/Z/X/CH/G/J com macetes, voltadas a provas de nível médio. Certificado gratuito.",
+    "https://kultivi.com/curso/portugues-para-concursos"
+   ]
+  },
+  {
+   "titulo": "Apostila de Português para Concursos (PDF gratuito, UOL/Ziggi)",
+   "paragrafos": [
+    "Apostila em PDF com teoria objetiva e questões comentadas, abrangendo fonética, acentuação, morfologia, sintaxe e redação oficial.",
+    "https://p.download.uol.com.br/ziggi/ftp4/cursos-apostilas/apostila-portugues-para-concurso.pdf"
+   ]
+  },
+  {
+   "titulo": "Manual Preparatório INSS — Grupo Focus (visualização gratuita no SlideShare)",
+   "paragrafos": [
+    "Manual completo (1.036 páginas) com capítulo extenso de Língua Portuguesa seguido de questões comentadas da Cebraspe. Visualização gratuita online.",
+    "https://pt.slideshare.net/slideshow/inss-tcnico-do-seguro-social-grtis/103432249"
+   ]
+  },
+  {
+   "titulo": "Cursa — preparatórios gratuitos para concursos",
+   "paragrafos": [
+    "Cursos gratuitos de português, interpretação e redação com exercícios e certificado, incluindo trilha preparatória para o INSS.",
+    "https://cursa.app/cursos-online-preparatorio-concursos-gratuito"
+   ]
+  }
+ ],
+ "complementos": []
+}
