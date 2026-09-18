@@ -18,7 +18,7 @@ export default function Conteudo({ iaDisponivel }: { iaDisponivel: boolean }) {
   const prog = useProgresso();
 
   useEffect(() => {
-    fetch('/conteudo/index.json').then((r) => r.json()).then(setIdx);
+    fetch('conteudo/index.json').then((r) => r.json()).then(setIdx);
   }, []);
   useEffect(() => {
     setCap(null);
@@ -57,7 +57,7 @@ export default function Conteudo({ iaDisponivel }: { iaDisponivel: boolean }) {
           <button
             key={d.slug}
             className="text-left p-3"
-            onClick={() => fetch('/conteudo/' + d.slug + '.json').then((r) => r.json()).then(setCap)}
+            onClick={() => fetch('conteudo/' + d.slug + '.json').then((r) => r.json()).then(setCap)}
           >
             <span className="font-prova font-semibold">{d.nome}</span>
             <span className="block text-xs text-neutral-500 mt-1">{d.capitulos} capítulos · {d.paragrafos} parágrafos</span>

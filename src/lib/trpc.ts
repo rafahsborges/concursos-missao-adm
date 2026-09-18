@@ -3,7 +3,7 @@ import type { AppRouter } from '../../server/router';
 import { useEffect, useState } from 'react';
 
 export const trpc = createTRPCClient<AppRouter>({
-  links: [httpBatchLink({ url: '/trpc' })],
+  links: [httpBatchLink({ url: import.meta.env.VITE_TRPC_URL ?? '/trpc' })],
 });
 
 export function useAIStatus(): { disponivel: boolean; mock: boolean } | null {
