@@ -1,13 +1,19 @@
 import banco from '../data/banco.json';
 import type { Questao, Modulo } from '../types';
 import { CONCURSOS } from '../data/concursos';
-import { useProgresso } from '../lib/store';
+import { useProgresso, calcularStreak, definirMeta } from '../lib/store';
 
 const Q = banco as Questao[];
 
 export default function Inicio({ ir }: { ir: (m: Modulo) => void }) {
   const prog = useProgresso();
   const resolvidas = Object.keys(prog.respostas).length;
+  const streak = calcularStreak(prog);
+  const meta = prog.metas?.diaria ?? 20;
+  const hoje = new Date().toISOString().slice(0, 10);
+  const hojeCount = Object.values(prog.tempoQuestoes ?? {}).filter(
+    (t) => new Date(t.ts).toISOString().slice(0, 10) === hoje
+  ).length;
   return (
     <div className="fade-in">
       <p className="eyebrow mb-1">Dashboard</p>
@@ -35,9 +41,25 @@ export default function Inicio({ ir }: { ir: (m: Modulo) => void }) {
       <div className="flex gap-6 mt-8 flex-wrap items-center">
         <button className="btn-ink" onClick={() => ir('banco')}>Continuar no banco de questões</button>
         <button onClick={() => ir('simulado')}>Fazer um simulado</button>
-        <span className="text-sm text-neutral-600">
-          {Q.length} questões reais no banco · {resolvidas} resolvidas · {prog.simulados.length} simulados
-        </span>
+        <div className="border border-[var(--line)] p-4 text-sm">
+          <div className="flex items-baseline gap-6 flex-wrap">
+            <span className="font-prova font-semibold text-lg">{streak} dia(s) seguidos de estudo</span>
+            <span>Meta diária: {meta} questões</span>
+            <span>Hoje: {hojeCount}/{meta}</span>
+            <div className="barra flex-1 min-w-[120px]">
+              <div style={{ width: Math.min(100, Math.round((hojeCount / meta) * 100)) + '%', background: 'var(--green)' }} />
+            </div>
+            <button
+              className="text-xs"
+              onClick={() => {
+                const n = prompt('Meta diária de questões (atual: ' + meta + '):');
+                if (n && !isNaN(Number(n))) definirMeta(Number(n));
+              }}
+            >
+              Definir meta
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );

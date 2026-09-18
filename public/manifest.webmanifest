@@ -1,0 +1,9 @@
+{
+  "name": "Reta Final — Questões Reais de Concursos",
+  "short_name": "Reta Final",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#fafafa",
+  "theme_color": "#0a0a0a",
+  "description": "Banco de 810 questões reais, cronograma, simulados e conteúdo para INSS, BB, TJDFT e EBSERH."
+}

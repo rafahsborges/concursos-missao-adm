@@ -9,6 +9,7 @@ import Banco from './pages/Banco';
 import QuestoesIA from './pages/QuestoesIA';
 import Simulado from './pages/Simulado';
 import Tutor from './pages/Tutor';
+import Redacao from './pages/Redacao';
 import Desempenho from './pages/Desempenho';
 import { useAIStatus } from './lib/trpc';
 
@@ -36,6 +37,7 @@ export default function App() {
         {modulo === 'banco' && <Banco preset={presetBanco} />}
         {modulo === 'ia' && <QuestoesIA />}
         {modulo === 'simulado' && <Simulado />}
+        {modulo === 'redacao' && <Redacao />}
         {modulo === 'tutor' && <Tutor />}
         {modulo === 'desempenho' && <Desempenho />}
       </main>

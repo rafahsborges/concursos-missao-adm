@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import { useRef } from 'react';
 import banco from '../data/banco.json';
 import type { Questao } from '../types';
 import { gerarCronograma, fmtData } from '../lib/cronograma';
@@ -11,7 +12,18 @@ export default function Cronograma({ irBanco }: { irBanco: (concurso: string, di
   const [concurso, setConcurso] = useState('');
   const [inicio, setInicio] = useState(new Date().toISOString().slice(0, 10));
   const prog = useProgresso();
-  const plano = useMemo(() => gerarCronograma(concurso, inicio), [concurso, inicio]);
+  const erradas = useMemo(() => {
+    const m: Record<string, number> = {};
+    for (const q of Q) {
+      const r = prog.respostas[q.id];
+      if (r && r !== q.gabarito && !q.anulada) {
+        const k = q.concurso + '|' + q.disciplina;
+        m[k] = (m[k] ?? 0) + 1;
+      }
+    }
+    return m;
+  }, [prog.respostas]);
+  const plano = useMemo(() => gerarCronograma(concurso, inicio, erradas), [concurso, inicio, erradas]);
 
   const totalItens = plano.reduce((s, d) => s + d.itens.length, 0);
   const feitos = plano.reduce(
@@ -82,7 +94,10 @@ export default function Cronograma({ irBanco }: { irBanco: (concurso: string, di
                   <div className="flex-1">
                     <span className={`font-prova font-semibold ${feito ? 'line-through' : ''}`}>{it.disciplina}</span>
                     <span className="block text-xs text-neutral-500">
-                      {it.concurso} · {Math.floor(it.duracaoMin / 60)}h de estudo · sugerido: {it.questoes} questões
+                      {it.concurso} · {Math.floor(it.duracaoMin / 60)}h de estudo ·{' '}
+                      {it.tipo === 'revisao' && it.erradas > 0
+                        ? 'caderno de erros: ' + it.erradas + ' questão(ões) errada(s) para revisar'
+                        : 'sugerido: ' + it.questoes + ' questões'}
                     </span>
                   </div>
                   <button className="text-xs" onClick={() => irBanco(it.concurso, it.disciplina)}>

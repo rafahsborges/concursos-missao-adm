@@ -25,6 +25,7 @@ export interface ItemCronograma {
   concurso: string;
   duracaoMin: number;
   questoes: number;
+  erradas: number; // questões erradas pendentes da revisão
 }
 
 export interface DiaCronograma {
@@ -54,14 +55,30 @@ function dataBase(inicioISO: string): Date {
   return isNaN(d.getTime()) ? new Date() : d;
 }
 
-export function gerarCronograma(concurso: string, inicioISO: string): DiaCronograma[] {
-  const base = dataBase(inicioISO);
+function ehDiaUtil(d: Date): boolean {
+  return d.getDay() !== 0 && d.getDay() !== 6; // sem sábado e domingo
+}
+
+function proximoDiaUtil(d: Date): Date {
+  const r = new Date(d);
+  while (!ehDiaUtil(r)) r.setDate(r.getDate() + 1);
+  return r;
+}
+
+function addDiasUteis(base: Date, n: number): Date {
+  const d = new Date(base);
+  let restam = n;
+  while (restam > 0) {
+    d.setDate(d.getDate() + 1);
+    if (ehDiaUtil(d)) restam--;
+  }
+  return d;
+}
+
+export function gerarCronograma(concurso: string, inicioISO: string, erradasPorTopico?: Record<string, number>): DiaCronograma[] {
+  const base = proximoDiaUtil(dataBase(inicioISO));
   const topicosLista = topicos(concurso);
-  const dataDoDia = (dia: number): string => {
-    const d = new Date(base);
-    d.setDate(d.getDate() + dia);
-    return d.toISOString().slice(0, 10);
-  };
+  const dataDoDia = (dia: number): string => addDiasUteis(base, dia).toISOString().slice(0, 10);
 
   interface Pendente { topico: Topico; tipo: 'estudo' | 'revisao'; due: number; }
   const pendentes: Pendente[] = topicosLista.map((topico) => ({ topico, tipo: 'estudo' as const, due: 0 }));
@@ -79,10 +96,15 @@ export function gerarCronograma(concurso: string, inicioISO: string): DiaCronogr
       .sort((a, b) =>
         a.tipo === b.tipo ? a.due - b.due : a.tipo === 'revisao' ? -1 : 1);
 
+    const chavesDoDia = new Set<string>(); // impede repetição da mesma matéria no mesmo dia
     for (const p of elegiveis) {
+      const chave = p.topico.concurso + '|' + p.topico.disciplina;
+      if (chavesDoDia.has(chave)) continue;
       const dur = p.tipo === 'estudo' ? ESTUDO_MIN : REVISAO_MIN;
       if (dur > cap) continue;
       cap -= dur;
+      const chaveTopico = p.topico.concurso + '|' + p.topico.disciplina;
+      const erradas = erradasPorTopico?.[chaveTopico] ?? 0;
       itens.push({
         id: p.topico.concurso + '|' + p.topico.disciplina + '|' + p.tipo + '|' + diaIdx,
         dia: diaIdx,
@@ -93,9 +115,11 @@ export function gerarCronograma(concurso: string, inicioISO: string): DiaCronogr
         duracaoMin: dur,
         questoes: p.tipo === 'estudo'
           ? Math.max(10, Math.min(30, Math.round(p.topico.total * 0.15)))
-          : 15,
+          : (erradas > 0 ? Math.min(erradas, 20) : 15),
+        erradas,
       });
       pendentes.splice(pendentes.indexOf(p), 1);
+      chavesDoDia.add(chave);
       if (p.tipo === 'estudo') {
         for (const r of REVISOES) {
           pendentes.push({ topico: p.topico, tipo: 'revisao', due: diaIdx + r });

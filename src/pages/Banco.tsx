@@ -1,8 +1,8 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import banco from '../data/banco.json';
 import type { Questao } from '../types';
 import QuestaoView from '../components/QuestaoView';
-import { useProgresso, responder } from '../lib/store';
+import { useProgresso, responder, registrarDiaEstudo, registrarTempoQuestao } from '../lib/store';
 import { useAIStatus } from '../lib/trpc';
 
 const Q = banco as Questao[];
@@ -46,6 +46,19 @@ export default function Banco({ preset }: { preset?: { concurso: string; discipl
   const opcoes = (campo: 'concurso' | 'prova' | 'disciplina'): string[] =>
     [...new Set(Q.map((x) => x[campo]))].sort();
   const q = lista[atual];
+
+  // cronômetro por questão: registra o tempo ao trocar de questão
+  const tempoRef = useRef<{ id: string; ini: number } | null>(null);
+  useEffect(() => {
+    tempoRef.current = q ? { id: q.id, ini: Date.now() } : null;
+    return () => {
+      if (tempoRef.current) {
+        const seg = Math.round((Date.now() - tempoRef.current.ini) / 1000);
+        if (seg >= 3 && seg < 3600) registrarTempoQuestao(tempoRef.current.id, seg);
+      }
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [atual, lista]);
 
   return (
     <div className="fade-in">
@@ -104,7 +117,12 @@ export default function Banco({ preset }: { preset?: { concurso: string; discipl
             modo="estudo"
             marcada={prog.respostas[q.id] ?? null}
             corrigida={corrigida.has(q.id)}
-            onMarcar={(alt) => { if (!corrigida.has(q.id)) responder(q.id, alt); }}
+            onMarcar={(alt) => {
+                if (!corrigida.has(q.id)) {
+                  responder(q.id, alt);
+                  registrarDiaEstudo();
+                }
+              }}
             ia={ia?.disponivel ? { disponivel: true, mostrarDica: !corrigida.has(q.id), mostrarExplicar: corrigida.has(q.id) } : undefined}
           />
           <div className="flex gap-3">

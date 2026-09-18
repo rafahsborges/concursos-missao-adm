@@ -69,7 +69,55 @@ export function resetPerfil(id: string): void {
   subscribers.forEach((f) => f());
 }
 
-export const vazio = (): Progresso => ({ respostas: {}, respostasIA: {}, simulados: [], lidos: {}, cronograma: {} });
+export const vazio = (): Progresso => ({
+  respostas: {}, respostasIA: {}, simulados: [], lidos: {}, cronograma: {},
+  metas: { diaria: 20 }, diasEstudo: {}, tempoQuestoes: {},
+});
+const hojeISO = (): string => new Date().toISOString().slice(0, 10);
+
+export function registrarDiaEstudo(): void {
+  const p = getProgresso();
+  p.diasEstudo[hojeISO()] = Date.now();
+  setProgresso(p);
+}
+export function registrarTempoQuestao(id: string, seg: number): void {
+  const p = getProgresso();
+  const a = p.tempoQuestoes[id];
+  p.tempoQuestoes[id] = { seg: (a?.seg ?? 0) + seg, ts: Date.now() };
+  p.diasEstudo[hojeISO()] = Date.now();
+  setProgresso(p);
+}
+export function calcularStreak(p: Progresso): number {
+  let streak = 0;
+  const d = new Date();
+  if (!p.diasEstudo[d.toISOString().slice(0, 10)]) d.setDate(d.getDate() - 1); // hoje ainda pode estar em andamento
+  while (p.diasEstudo[d.toISOString().slice(0, 10)]) {
+    streak++;
+    d.setDate(d.getDate() - 1);
+  }
+  return streak;
+}
+export function definirMeta(diaria: number): void {
+  const p = getProgresso();
+  p.metas = { diaria: Math.max(1, Math.min(500, Math.round(diaria))) };
+  setProgresso(p);
+}
+export function exportarProgresso(): string {
+  return JSON.stringify({ versao: 1, quando: Date.now(), progresso: getProgresso() }, null, 1);
+}
+export function importarProgresso(bruto: string): string | null {
+  try {
+    const dados = JSON.parse(bruto) as { versao?: number; progresso?: Partial<Progresso> };
+    const p = dados.progresso ?? (dados as Partial<Progresso>);
+    if (!p || typeof p !== 'object' || (!p.respostas && !p.simulados)) {
+      return 'Arquivo inválido: não contém progresso exportado pelo sistema.';
+    }
+    setProgresso({ ...vazio(), ...p });
+    return null;
+  } catch {
+    return 'Arquivo inválido: JSON malformado.';
+  }
+}
 export function getProgresso(perfilId: string = getPerfilAtivo()): Progresso {
   return { ...vazio(), ...ler<Progresso>(P_PROG + ':' + perfilId, vazio()) };
 }

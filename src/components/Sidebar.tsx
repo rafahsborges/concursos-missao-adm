@@ -9,6 +9,7 @@ const ITENS: { id: Modulo; rotulo: string }[] = [
   { id: 'banco', rotulo: 'Banco de questões' },
   { id: 'ia', rotulo: 'Questões IA' },
   { id: 'simulado', rotulo: 'Simulado' },
+  { id: 'redacao', rotulo: 'Redação' },
   { id: 'tutor', rotulo: 'Tutor IA' },
   { id: 'desempenho', rotulo: 'Desempenho' },
 ];

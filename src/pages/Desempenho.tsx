@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import banco from '../data/banco.json';
 import type { Questao } from '../types';
-import { useProgresso, resetPerfil, usePerfis } from '../lib/store';
+import { useProgresso, resetPerfil, usePerfis, exportarProgresso, importarProgresso } from '../lib/store';
 
 const Q = banco as Questao[];
 const cor = (p: number): string => (p >= 70 ? 'var(--green)' : p >= 50 ? '#eab308' : 'var(--red)');
@@ -36,10 +36,65 @@ export default function Desempenho() {
     [prog.respostas]
   );
 
+  const porBanca = useMemo(() => {
+    const m = new Map<string, { total: number; certas: number }>();
+    for (const q of Q) {
+      const r = prog.respostas[q.id];
+      if (!r) continue;
+      const e = m.get(q.banca) ?? { total: 0, certas: 0 };
+      e.total++;
+      if (r === q.gabarito) e.certas++;
+      m.set(q.banca, e);
+    }
+    return [...m.entries()]
+      .map(([b, v]) => ({ b, ...v, pct: Math.round((v.certas / v.total) * 100) }))
+      .sort((a, b) => b.pct - a.pct);
+  }, [prog.respostas]);
+
+  const tempos = Object.values(prog.tempoQuestoes ?? {});
+  const mediaSeg = tempos.length ? tempos.reduce((soma, t) => soma + t.seg, 0) / tempos.length : 0;
+
   return (
     <div className="fade-in">
       <p className="eyebrow mb-1">Desempenho · somente banco oficial (questões IA não entram aqui)</p>
       <h2 className="font-prova text-3xl font-semibold mb-6">Estatísticas</h2>
+      <section className="mb-8">
+        <h3 className="font-prova text-xl font-semibold border-b border-[var(--line)] pb-2 mb-3">Resumo</h3>
+        <p className="text-sm text-neutral-600 mb-1">
+          Tempo médio por questão: {mediaSeg > 0 ? mediaSeg.toFixed(1) + 's' : '—'} ({tempos.length} questões cronometradas)
+        </p>
+        <div className="flex gap-2 mt-3">
+          <button
+            onClick={() => {
+              const blob = new Blob([exportarProgresso()], { type: 'application/json' });
+              const a = document.createElement('a');
+              a.href = URL.createObjectURL(blob);
+              a.download = 'progresso-reta-final.json';
+              a.click();
+            }}
+          >
+            Exportar progresso
+          </button>
+          <label className="text-sm border border-[var(--line)] px-3 py-1.5 cursor-pointer bg-white">
+            Importar progresso…
+            <input
+              type="file"
+              accept="application/json"
+              className="hidden"
+              onChange={(e) => {
+                const f = e.target.files?.[0];
+                if (!f) return;
+                const rd = new FileReader();
+                rd.onload = () => {
+                  const erro = importarProgresso(String(rd.result));
+                  alert(erro ?? 'Progresso importado com sucesso.');
+                };
+                rd.readAsText(f);
+              }}
+            />
+          </label>
+        </div>
+      </section>
       <section className="mb-8">
         <h3 className="font-prova text-xl font-semibold border-b border-[var(--line)] pb-2 mb-3">Por disciplina</h3>
         {porDisciplina.length === 0 && <p className="text-sm text-neutral-500">Resolva questões no banco para ver estatísticas.</p>}

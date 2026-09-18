@@ -17,7 +17,7 @@ export interface Questao {
   anulada: boolean;
 }
 
-export type Modulo = 'inicio' | 'trilha' | 'cronograma' | 'conteudo' | 'banco' | 'ia' | 'simulado' | 'tutor' | 'desempenho';
+export type Modulo = 'inicio' | 'trilha' | 'cronograma' | 'conteudo' | 'banco' | 'ia' | 'simulado' | 'redacao' | 'tutor' | 'desempenho';
 
 export interface ConcursoInfo {
   nome: string; banca: string; ano: number; cargo: string;
@@ -39,6 +39,9 @@ export interface Progresso {
   simulados: SimuladoRec[];                 // últimos 100
   lidos: Record<string, number>;            // capítuloId -> ts
   cronograma: Record<string, number>;       // itemId do cronograma -> ts
+  metas: { diaria: number };                // meta diária de questões
+  diasEstudo: Record<string, number>;       // dataISO -> ts (para streak)
+  tempoQuestoes: Record<string, { seg: number; ts: number }>; // id -> tempo gasto
 }
 
 export interface Perfil { id: string; nome: string; criadoEm: number; }

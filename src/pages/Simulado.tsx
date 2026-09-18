@@ -11,8 +11,9 @@ type ModoSimulado = 'oficial' | 'personalizado' | 'dinamico';
 
 export default function Simulado() {
   const ia = useAIStatus();
-  const [fase, setFase] = useState<'config' | 'prova' | 'revisao'>('config');
+  const [fase, setFase] = useState<'config' | 'prova' | 'folha' | 'revisao'>('config');
   const [modo, setModo] = useState<ModoSimulado>('oficial');
+  const [provaReal, setProvaReal] = useState(false);
   const [concurso, setConcurso] = useState('INSS 2022');
   const [prova, setProva] = useState('');
   const [disciplina, setDisciplina] = useState('');
@@ -66,7 +67,7 @@ export default function Simulado() {
       quando: Date.now(),
       detalhes,
     });
-    setFase('revisao');
+    setFase(provaReal ? 'folha' : 'revisao');
   }
 
   useEffect(() => {
@@ -208,6 +209,11 @@ export default function Simulado() {
             </label>
           )}
 
+          <label className="text-sm flex items-center gap-2">
+            <input type="checkbox" checked={provaReal} onChange={(e) => setProvaReal(e.target.checked)} />
+            Modo prova real — sem voltar às questões, com folha de respostas no final
+          </label>
+
           <label className="block text-sm">
             Tempo (minutos)
             <input type="number" min={5} value={tempoMin} onChange={(e) => setTempoMin(Number(e.target.value))} className="block w-full mt-1" />
@@ -248,6 +254,7 @@ export default function Simulado() {
             </button>
           </div>
         </div>
+        {!provaReal && (
         <div className="flex flex-wrap gap-1 mb-6">
           {qs.map((x, i) => (
             <button
@@ -259,11 +266,38 @@ export default function Simulado() {
             </button>
           ))}
         </div>
+        )}
         <QuestaoView questao={q} modo="simulado" marcada={resp[q.id] ?? null} corrigida={false} onMarcar={(alt) => setResp({ ...resp, [q.id]: alt })} />
         <div className="flex gap-3">
-          <button disabled={atual === 0} onClick={() => setAtual(atual - 1)}>Anterior</button>
+          {!provaReal && (
+            <button disabled={atual === 0} onClick={() => setAtual(atual - 1)}>Anterior</button>
+          )}
           <button disabled={atual >= qs.length - 1} onClick={() => setAtual(atual + 1)}>Próxima</button>
           <span className="self-center text-xs text-neutral-500">{atual + 1}/{qs.length}</span>
+        </div>
+      </div>
+    );
+  }
+
+  if (fase === 'folha') {
+    return (
+      <div className="fade-in">
+        <p className="eyebrow mb-1">Folha de respostas</p>
+        <h2 className="font-prova text-3xl font-semibold mb-2">Simulado finalizado</h2>
+        <p className="text-sm text-neutral-600 mb-6">
+          Confira suas marcações antes de ver a correção. Em branco = questão sem resposta.
+        </p>
+        <div className="grid grid-cols-5 gap-1 mb-6 max-w-lg">
+          {qs.map((q, i) => (
+            <div key={q.id} className={`border border-[var(--line)] p-2 text-center ${resp[q.id] ? 'alt-marca' : ''}`}>
+              <span className="block text-xs text-neutral-500">{i + 1}</span>
+              <span className="font-prova font-semibold">{resp[q.id] ?? '—'}</span>
+            </div>
+          ))}
+        </div>
+        <div className="flex gap-3">
+          <button className="btn-ink" onClick={() => setFase('revisao')}>Ver correção comentada</button>
+          <button onClick={() => setFase('config')}>Descartar e voltar</button>
         </div>
       </div>
     );
