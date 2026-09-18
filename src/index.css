@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { --paper:#fafafa; --paper-2:#f2f2f2; --ink:#0a0a0a; --line:#e5e5e5; --hl:#ffffa2; --red:#ec3929; --green:#1a7f37; }
+body { background: var(--paper); color: var(--ink); font-family: Inter, system-ui, sans-serif; }
+.font-prova { font-family: 'Source Serif 4', Georgia, serif; }
+.eyebrow { text-transform: uppercase; letter-spacing: .14em; font-size: .72rem; font-weight: 600; color: #737373; }
+.fade-in { animation: fade .35s ease both; }
+@keyframes fade { from { opacity: 0; transform: translateY(4px); } }
+.hl-link { background-image: linear-gradient(to right, var(--hl) 50%, transparent 50%); background-size: 200% 100%;
+  background-position: 100% 0; transition: background-position .35s ease; text-decoration: underline;
+  text-decoration-color: #a3a3a3; text-underline-offset: 3px; cursor: pointer; }
+.hl-link:hover { background-position: 0 0; }
+.alt-marca { background: var(--hl) !important; }
+.alt-certa { background: #d3f0da !important; box-shadow: inset 3px 0 0 var(--green); }
+.alt-errada { background: #fbe3e0 !important; box-shadow: inset 3px 0 0 var(--red); }
+.bloco-ia { border-left: 3px solid var(--hl); background: var(--paper-2); }
+.selo-anulada { background: var(--hl); font-size: .7rem; font-weight: 700; padding: 1px 6px; letter-spacing: .1em; }
+input, select { background: #fff; border: 1px solid var(--line); padding: 6px 10px; font-size: .875rem; }
+button { border: 1px solid var(--line); padding: 6px 12px; font-size: .875rem; background: #fff; }
+button:hover { border-color: #a3a3a3; }
+button:disabled { opacity: .45; cursor: not-allowed; }
+.btn-ink { background: var(--ink); color: #fff; border-color: var(--ink); }
+.btn-red { color: var(--red); border-color: var(--red); background: #fff; }
+.barra { height: 10px; background: var(--paper-2); border: 1px solid var(--line); }
+.barra > div { height: 100%; }

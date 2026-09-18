@@ -1,0 +1,113 @@
+import { useEffect, useState } from 'react';
+import type { Perfil, Progresso } from '../types';
+
+const P_PERFIS = 'reta-final-perfis-v1';
+const P_ATIVO = 'reta-final-perfil-ativo';
+const P_PROG = 'reta-final-progresso-v1';
+const LEGADO = 'missao-ti-progresso-v1';
+
+function ler<T>(chave: string, padrao: T): T {
+  try {
+    const r = localStorage.getItem(chave);
+    return r ? (JSON.parse(r) as T) : padrao;
+  } catch {
+    return padrao;
+  }
+}
+function gravar(chave: string, valor: unknown): void {
+  localStorage.setItem(chave, JSON.stringify(valor));
+  subscribers.forEach((f) => f());
+}
+function gravarSilencio(k: string, v: unknown): void {
+  localStorage.setItem(k, JSON.stringify(v));
+}
+
+// migração do formato legado na primeira carga
+if (!localStorage.getItem(P_PERFIS)) {
+  const perfil: Perfil = { id: 'p1', nome: 'Meu perfil', criadoEm: Date.now() };
+  gravarSilencio(P_PERFIS, [perfil]);
+  gravarSilencio(P_ATIVO, 'p1');
+  const legado = localStorage.getItem(LEGADO);
+  if (legado) gravarSilencio(P_PROG + ':p1', JSON.parse(legado));
+}
+if (ler<Perfil[]>(P_PERFIS, []).length === 0) {
+  gravarSilencio(P_PERFIS, [{ id: 'p1', nome: 'Meu perfil', criadoEm: Date.now() }]);
+}
+if (!localStorage.getItem(P_ATIVO)) gravarSilencio(P_ATIVO, 'p1');
+
+type Listener = () => void;
+const subscribers = new Set<Listener>();
+export const onStore = (f: Listener): (() => void) => {
+  subscribers.add(f);
+  return () => {
+    subscribers.delete(f);
+  };
+};
+
+export const getPerfis = (): Perfil[] => ler<Perfil[]>(P_PERFIS, []);
+export const getPerfilAtivo = (): string => ler<string>(P_ATIVO, 'p1');
+
+export function criarPerfil(nome: string): void {
+  const p: Perfil = { id: 'p' + Date.now(), nome, criadoEm: Date.now() };
+  gravar(P_PERFIS, [...getPerfis(), p]);
+  gravar(P_ATIVO, p.id);
+}
+export function selecionarPerfil(id: string): void {
+  gravar(P_ATIVO, id);
+}
+export function renomearPerfil(id: string, nome: string): void {
+  gravar(P_PERFIS, getPerfis().map((p) => (p.id === id ? { ...p, nome } : p)));
+}
+export function removerPerfil(id: string): void {
+  const ps = getPerfis().filter((p) => p.id !== id);
+  gravar(P_PERFIS, ps.length ? ps : [{ id: 'p1', nome: 'Meu perfil', criadoEm: Date.now() }]);
+  if (getPerfilAtivo() === id) gravar(P_ATIVO, getPerfis()[0].id);
+  localStorage.removeItem(P_PROG + ':' + id);
+}
+export function resetPerfil(id: string): void {
+  gravarSilencio(P_PROG + ':' + id, JSON.stringify(vazio()));
+  subscribers.forEach((f) => f());
+}
+
+export const vazio = (): Progresso => ({ respostas: {}, respostasIA: {}, simulados: [], lidos: {}, cronograma: {} });
+export function getProgresso(perfilId: string = getPerfilAtivo()): Progresso {
+  return { ...vazio(), ...ler<Progresso>(P_PROG + ':' + perfilId, vazio()) };
+}
+export function setProgresso(p: Progresso, perfilId: string = getPerfilAtivo()): void {
+  p.simulados = p.simulados.slice(0, 100);
+  gravar(P_PROG + ':' + perfilId, p);
+}
+export function responder(idQuestao: string, alternativa: string): void {
+  const p = getProgresso();
+  p.respostas[idQuestao] = alternativa;
+  setProgresso(p);
+}
+export function responderIA(idQuestao: string, alternativa: string): void {
+  const p = getProgresso();
+  p.respostasIA[idQuestao] = alternativa;
+  setProgresso(p);
+}
+export function registrarSimulado(s: Progresso['simulados'][number]): void {
+  const p = getProgresso();
+  p.simulados = [s, ...p.simulados].slice(0, 100);
+  setProgresso(p);
+}
+export function marcarCronograma(itemId: string): void {
+  const p = getProgresso();
+  if (p.cronograma[itemId]) delete p.cronograma[itemId];
+  else p.cronograma[itemId] = Date.now();
+  setProgresso(p);
+}
+export function marcarLido(capId: string): void {
+  const p = getProgresso();
+  p.lidos[capId] = Date.now();
+  setProgresso(p);
+}
+
+export function useStore<T>(fn: () => T): T {
+  const [v, setV] = useState<T>(fn);
+  useEffect(() => onStore(() => setV(fn())), [fn]);
+  return v;
+}
+export const usePerfis = () => useStore(() => ({ perfis: getPerfis(), ativo: getPerfilAtivo() }));
+export const useProgresso = () => useStore(() => getProgresso());

@@ -1,0 +1,16 @@
+TOTAL: 810 questões | ids duplicados: nenhum
+INSS2022-CB1: extraídas=50 esperado=50 [OK]
+INSS2022-001: extraídas=70 esperado=70 [OK]
+BB2023-A: extraídas=70 esperado=70 [OK]
+BB2023-B: extraídas=70 esperado=70 [OK]
+BB2023-C: extraídas=70 esperado=70 [OK]
+TJDFT2022-T1: extraídas=60 esperado=60 [OK]
+TJDFT2022-T2: extraídas=60 esperado=60 [OK]
+TJDFT2022-T3: extraídas=60 esperado=60 [OK]
+TJDFT2022-T4: extraídas=60 esperado=60 [OK]
+EBSERH2025-T1: extraídas=60 esperado=60 [OK]
+EBSERH2025-T2: extraídas=60 esperado=60 [OK]
+EBSERH2025-T3: extraídas=60 esperado=60 [OK]
+EBSERH2025-T4: extraídas=60 esperado=60 [OK]
+DISCIPLINAS (13): Atualidades do Mercado Financeiro; Conhecimentos Bancários; Conhecimentos Básicos; Conhecimentos Específicos; Conhecimentos de Informática; Língua Inglesa; Língua Portuguesa; Matemática; Matemática Financeira; Provimento Geral da Corregedoria; Provimento Judicial Aplicado ao Processo Judicial Eletrônico; Vendas e Negociação; Ética no Serviço Público Regimento Interno e Lei de Organização Judiciária
+Amostragem manual obrigatória: fronteiras de disciplina e 2 questões por prova.
