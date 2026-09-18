@@ -8,6 +8,49 @@
  "ordem": {},
  "secoes": [
   {
+   "titulo": "Cap. 1 · Componentes e unidades",
+   "paragrafos": [
+    "CPU (processador): executa instruções; medida em GHz. Memória RAM: volátil, é a memória principal de trabalho (perde dados sem energia). ROM: somente leitura, não volátil (BIOS/UEFI). Armazenamento: HD magnético (maior capacidade, mais lento) e SSD (flash, mais rápido). Cache: memória rápida entre CPU e RAM (L1, L2, L3).",
+    "Periféricos: de entrada (teclado, mouse, scanner), de saída (monitor, impressora, caixas de som) e mistos (touchscreen, modem, impressora multifuncional). Barramento = via de comunicação interna. Placa-mãe conecta tudo; chipset gerencia comunicação."
+   ]
+  },
+  {
+   "titulo": "Cap. 1 · Sistemas operacionais e software",
+   "paragrafos": [
+    "Software básico (sistema operacional) gerencia hardware e executa aplicativos: Windows, Linux (distros: Ubuntu, Debian — software livre), macOS, Android e iOS (móveis). Software aplicativo: atende ao usuário (Word, navegador, editor de imagem).",
+    "Conceitos cobrados: multitarefa (vários programas simultaneamente), multiusuário, interface gráfica (GUI) × linha de comando (CLI: Prompt/CMD, PowerShell, Terminal Linux), boot (inicialização: BIOS/UEFA → POST → SO). Kernel é o núcleo do SO. Licenças: software livre (uso, cópia, estudo e modificação livres — Linux) × proprietário (Windows, MS Office — uso restrito à licença). Extensões de arquivo: .exe (executável Windows), .bat (lote), .zip/.rar (compactados), .pdf (documento portátil, Adobe)."
+   ]
+  },
+  {
+   "titulo": "Cap. 2 · Conceitos de rede",
+   "paragrafos": [
+    "LAN (rede local — casa/empresa), WAN (grande alcance geograficamente — internet é a maior WAN), WLAN (sem fio/Wi-Fi), MAN (metropolitana). Topologias: estrela (todos ligados a um hub/switch — mais comum), barramento, anel, malha.",
+    "Modelo OSI (7 camadas) vs TCP/IP (4 camadas: acesso à rede, internet, transporte, aplicação). Protocolos: HTTP/HTTPS (web — HTTPS com criptografia TLS), FTP (transferência de arquivos), SMTP (envio de e-mail), POP3 (recebimento baixando ao aparelho), IMAP (e-mail mantido no servidor, sincroniza vários dispositivos), DNS (traduz nome em IP), DHCP (atribui IP automaticamente). Endereço IP: IPv4 (ex.: 192.168.0.1) e IPv6 (hexadecimal, ex.: 2001:db8::1)."
+   ]
+  },
+  {
+   "titulo": "Cap. 2 · Internet, navegadores e segurança",
+   "paragrafos": [
+    "Navegadores (Chrome, Edge, Firefox, Safari) renderizam páginas em HTML; buscadores (Google, Bing) indexam conteúdo. Conceitos: URL, hiperlink, cookie (rastreamento/sessão), cache (acelera recarregamento). E-mail: campos CC (com cópia visível) e CCO/BCC (cópia oculta); anexos.",
+    "Segurança: malware (vírus — replica-se; worm — se propaga sozinho; trojan — disfarce; ransomware — sequestra dados; spyware — espiona; adware). Phishing (engenharia social por e-mail/site falso) × pharming (redirecionamento malicioso de DNS). Proteção: antivírus, firewall (barreira de rede), VPN (túnel criptografado), autenticação em dois fatores, atualizações de segurança. Backup é a principal proteção contra ransomware."
+   ]
+  },
+  {
+   "titulo": "Cap. 3 · Word e PowerPoint",
+   "paragrafos": [
+    "Word (editor de texto): arquivos .docx. Atalhos cobrados: Ctrl+C/V/X (copiar/colar/recortar), Ctrl+Z/Y (desfazer/refazer), Ctrl+B/I/U (negrito/itálico/sublinhado), Ctrl+S (salvar), Ctrl+P (imprimir), Ctrl+F (localizar), Ctrl+H (localizar e substituir), Ctrl+N (novo). Alinhamentos, quebra de página (Ctrl+Enter), estilos, cabeçalho/rodapé, mala direta (mesmo documento para vários destinatários).",
+    "PowerPoint (apresentação): .pptx; slides, transições (entre slides) × animações (dentro do slide); modo de exibição (apresentação F5 a partir do início; Shift+F5 do slide atual); mestre de slides (padroniza todos). OSA: objeto, animar por clique, slides ocultos, exportar PDF/vídeo."
+   ]
+  },
+  {
+   "titulo": "Cap. 3 · Excel e ferramentas",
+   "paragrafos": [
+    "Excel (planilha): .xlsx; célula = linha (número) × coluna (letra), ex.: B2. Fórmulas começam com =. Cobradas: SOMA(), MÉDIA(), MÁXIMO(), MÍNIMO(), SE(condição; se verdadeiro; se falso), CONT.SE/SOMASE (contagem/soma com critério), PROCV (busca vertical em tabela), CONCATENAR/& (unir textos), HOJE()/AGORA() (datas). Referências: relativa (B2 muda ao arrastar), absoluta ($B$2 fixa), mista (B$2/$B2).",
+    "Atalhos: Ctrl+setas (navega), Ctrl+Shift+seta (seleciona até a borda), Ctrl+Home (A1), F2 (editar célula), Ctrl+; (data atual), Shift+F3 (inserir função), Ctrl+PageUp/Down (entre planilhas), Enter (confirma e desce). Gráficos a partir de intervalo selecionado; formatação condicional; validação de dados; congelar painéis.",
+    "LibreOffice (gratuito): Writer (texto), Calc (planilha), Impress (apresentação), Base (banco) — formatos .odt/.ods/.odp (OpenDocument), com compatibilidade ao salvar em .docx/.xlsx. Google Workspace: Docs, Planilhas e Slides na nuvem, edição colaborativa em tempo real e salvamento automático."
+   ]
+  },
+  {
    "titulo": "Orientações de estudo",
    "paragrafos": [
     "Bloco de maior peso do BB (questões 41–55) e presente nos básicos do INSS e da EBSERH: atalhos de Office/LibreOffice, navegadores, redes, segurança e ferramentas digitais.",

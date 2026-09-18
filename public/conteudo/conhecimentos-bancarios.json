@@ -8,6 +8,55 @@
  "ordem": {},
  "secoes": [
   {
+   "titulo": "Cap. 1 · Estrutura: CMN, BACEN e CVM",
+   "paragrafos": [
+    "CMN (Conselho Monetário Nacional): órgão NORMATIVO, máxima autoridade — fixa diretrizes e políticas da moeda e do crédito (integrado pelo Ministro da Fazenda, presidente). BACEN (Banco Central): órgão FISCALIZADOR/executor — autoridade monetária, emite papel-moeda, controla o volume do crédito, fiscaliza instituições financeiras, administra as reservas cambiais e opera redes de pagamento (Pix).",
+    "CVM (Comissão de Valores Mobiliários): fiscaliza o mercado de valores mobiliários (ações, debêntures, fundos), protegendo investidores. SUSEP: regula seguros, capitalização e previdência privada aberta. Banco do Brasil e Caixa: bancos estatais com caráter comercial (BB também executa políticas do governo como agente)."
+   ]
+  },
+  {
+   "titulo": "Cap. 1 · Instituições do SFN",
+   "paragrafos": [
+    "Instituições financeiras bancárias comerciais: recebem depósitos à vista e realizam crédito (BB, Bradesco, Caixa). Múltiplas: carteiras comerciais + de investimento. Banco de investimento: capta por CDB/títulos e financia capital de giro/investimento (sem depósito à vista). Financeiras: crédito direto ao consumidor, parcelado. Cooperativas de crédito (Sicredi/Sicoob): atendem associados.",
+    "Não bancárias: seguradoras, sociedades de capitalização, corretoras/distribuidoras de valores, administradoras de cartões, fundos de pensão (entidades fechadas). Instituições de pagamento: emissoras de moeda eletrônica e arranjos como o Pix."
+   ]
+  },
+  {
+   "titulo": "Cap. 2 · Emissão e meios de pagamento",
+   "paragrafos": [
+    "Somente o BACEN emite papel-moeda; moeda escritural = depósitos à vista (criados pelos bancos comerciais via concessão de crédito — expansão da moeda escritural limitada pelos depósitos compulsórios). Meios de pagamento: dinheiro em espécie, cheques, cartões, transferências, Pix.",
+    "Compulsório: parcela dos depósitos que os bancos devem manter no BACEN (instrumento de controle do crédito). Redução do compulsório aumenta a capacidade de empréstimo; aumento reduz."
+   ]
+  },
+  {
+   "titulo": "Cap. 2 · Política monetária do BACEN",
+   "paragrafos": [
+    "Instrumentos: taxa Selic (meta de juros básicos da economia, definida pelo COPOM — Comitê de Política Monetária), open market (compra/venda de títulos públicos: venda absorve recursos e sobe juros; compra injeta), compulsório, redesconto e swap cambial.",
+    "Contexto atual cobrado: meta de inflação definida pelo CMN; regime de metas com banda (desde 2021, banda de 1,5 ponto percentual para mais ou menos ao redor da meta); IPCA é o índice oficial de preços; bacen comunica decisões em atas do COPOM."
+   ]
+  },
+  {
+   "titulo": "Cap. 3 · Crédito e captação",
+   "paragrafos": [
+    "Captação: CDB (título do banco, rende taxa prefixada ou pós-fixada no CDI, com garantia do FGC até o limite), poupança (rendimento TR + juros de 0,5% a.m. com IR isento — regra dos R$ 500 saldo), LCI/LCA (isentas de IR, lastro em crédito imobiliário/agro), debêntures (de empresas, com IR).",
+    "Crédito: cheque especial (maior taxa), cartão de crédito rotativo, consignado (desconto em folha; menor taxa), CDC (direto ao consumidor), financiamento imobiliário (SAC/Price, alienação fiduciária), antecipação de recebíveis, crédito rural. CET (Custo Efetivo Total) reúne juros, tarifas e tributos — a comparação correta entre ofertas."
+   ]
+  },
+  {
+   "titulo": "Cap. 3 · Pix, tarifas e proteção ao cliente",
+   "paragrafos": [
+    "Pix: sistema instantâneo de pagamentos do BACEN (lançado em 2020) — transferências 24/7, gratuitas para pessoa física, com chaves (CPF, e-mail, celular, aleatória) e QR Code; operações via SPI (Sistema de Pagamentos Instantâneos). Proteção: 'Pix golpe' — mecanismos de bloqueio e MDR. Conta salário e conta corrente têm tarifas regulamentadas (pacote de serviços essenciais).",
+    "Registro de clientes: Cadastro Positivo (base de bons pagadores, opt-out — vale automaticamente desde 2020) e Cadastro Negativo (SPC/Serasa). COAF: órgão de inteligência financeira que previne lavagem de dinheiro; bancos devem manter programas de PLD/FTP (Prevenção à Lavagem de Dinheiro e ao Financiamento ao Terrorismo) e reportar operações suspeitas."
+   ]
+  },
+  {
+   "titulo": "Cap. 4 · Estratégia, canais e agenda",
+   "paragrafos": [
+    "BB (fundado 1808, mais antigo em atividade): banco comercial estatal sob controle da União (acionista majoritária), vinculado ao Ministério da Fazenda, atua também como agente operador de programas governamentais (crédito rural, Crédito Amigo, benefícios sociais via Caixa? não — benefícios via BB e Caixa conforme o programa).",
+    "Canais: agências (atendimento segmentado: Estilo/Private/Premiere), autoatendimento, Fone Fácil, internet banking e o app — com forte expansão digital (agenCIA digital, correspondentCA bancária nas Casas Lotéricas parceiras? não — lotéricas são da Caixa; BB usa correspondentes como farmácias e postos). Estratégia centrada em relacionamento, crédito produtivo e presença no agronegócio (é o maior financiador do agro)."
+   ]
+  },
+  {
    "titulo": "Orientações de estudo",
    "paragrafos": [
     "Maior bloco bancário do BB (questões 31–40): Sistema Financeiro Nacional, Conselho Monetário Nacional, Banco Central, estratégia do Banco do Brasil e normas de atendimento.",

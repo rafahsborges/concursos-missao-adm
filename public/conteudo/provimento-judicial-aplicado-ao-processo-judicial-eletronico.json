@@ -8,6 +8,20 @@
  "ordem": {},
  "secoes": [
   {
+   "titulo": "Cap. 1 · Conceitos e legislação",
+   "paragrafos": [
+    "PJe: sistema nacional de processo eletrônico desenvolvido pelo CNJ, operado por cada tribunal. No TJDFT é o ambiente oficial de tramitação processual: petições iniciais e intermediárias, intimações, juntada de documentos e prazos contados em dia útil eletrônico. Fontes: Resolução CNJ 46/2007 (implantação do processo eletrônico) e normas internas do TJDFT.",
+    "Conceitos cobrados: protocolo eletrônico com certificado digital (advogados e membros do MP), procuração eletrônica, intimação por disponibilização no sistema (ciência presumida), dia útil eletrônico (pode incluir sábados, conforme regulamento do tribunal) e assinatura digital com certificado ICP-Brasil."
+   ]
+  },
+  {
+   "titulo": "Cap. 1 · Fluxos do dia a dia das serventias",
+   "paragrafos": [
+    "Fluxo típico: petição protocolada → conferência administrativa (serventia/técnico) → distribuição → conclusão ao juiz → despacho/decisão → intimação eletrônica das partes → cumprimento (mandados digitais e cartas precatórias eletrônicas). O técnico judiciário atua na conferência, no registro de distribuição e no suporte aos fluxos eletrônicos.",
+    "Guias do CNJ (docs.pje.jus.br): guia do advogado (peticionar, consultar), guia do servidor/serventia (registrar, distribuir, expedir) e guia do juiz (despachar, sentenciar). Estude pelos guias oficiais — cobrem o que a prova pergunta sobre cadastro, certificado, intimações e prazos."
+   ]
+  },
+  {
    "titulo": "Orientações de estudo",
    "paragrafos": [
     "Bloco do TJDFT sobre o PJe: fluxos processuais eletrônicos, prazos, atuação das serventias e provimentos que regulam o processo eletrônico no DF.",

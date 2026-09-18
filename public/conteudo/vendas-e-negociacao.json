@@ -8,6 +8,34 @@
  "ordem": {},
  "secoes": [
   {
+   "titulo": "Cap. 1 · Fundamentos do atendimento bancário",
+   "paragrafos": [
+    "O agente comercial (escriturário BB) é o elo entre o banco e o cliente: executa operações no caixa, orienta sobre produtos e abre contas. Qualidade no atendimento = resolver a necessidade do cliente na primeira tentativa, com cordialidade, agilidade e conhecimento técnico.",
+    "Ciclo de atendimento: recepção/abraço (saudação personalizada) → identificação da necessidade (escuta ativa, perguntas abertas) → oferta da solução adequada (produto que resolve, não o que mete) → confirmação de satisfação (fechamento) → despedida e registro. Quebra de ciclo em qualquer etapa gera insatisfação."
+   ]
+  },
+  {
+   "titulo": "Cap. 1 · Tipos de cliente e abordagem",
+   "paragrafos": [
+    "Perfil do cliente: dominador (direto, impaciente — seja objetivo e dê opções), analítico (quer dados e comparativos — traga números, tabelas, prazos), influente/afável (gosta de conversa e relacionamento — construa rapport), estável/passivo (decide devagar — ofereça segurança e confirme por escrito). Adaptar a comunicação ao perfil é cobrança situacional da Cesgranrio.",
+    "Cliente difícil: nunca contrarie frontalmente ('o senhor está enganado'); use escuta ativa, acolha a reclamação ('compreendo sua situação'), resuma o problema, apresente solução ou prazo, e encerre com confirmação. Reclamação bem tratada fideliza mais que atendimento sem falhas (efeito 'recuperação de serviço')."
+   ]
+  },
+  {
+   "titulo": "Cap. 2 · Processo de venda consultiva",
+   "paragrafos": [
+    "Vender não é empurrar produto: é identificar necessidade e oferecer solução. Etapas: prospecção/preparação → abordagem e rapport → levantamento de necessidades (perguntas: 'o senhor costuma usar...?') → apresentação da solução ligada ao benefício (fale de vantagem, não de característica: 'rende mais que a poupança' e não 'é um CDB de 110% do CDI' — na verdade use os dois) → superação de objeções → fechamento → pós-venda (acompanhamento gera indicação e cross-selling).",
+    "Cross-selling (venda cruzada: oferecer produto complementar — quem tem conta corrente pode querer cartão) e up-selling (upgrade do produto — poupança → CDB). Ética: adequação de produto ao perfil do cliente; informar riscos, prazos e custos; proibido vincular produtos (não condicione o empréstimo à compra do seguro — prática abusiva do CDC)."
+   ]
+  },
+  {
+   "titulo": "Cap. 2 · Negociação e comunicação",
+   "paragrafos": [
+    "Comunicação: verbal (palavras — apenas ~7% do impacto), paraverbal (tom, ritmo, volume — ~38%) e não verbal (postura, gestos, contato visual — ~55%). Em atendimento presencial, a linguagem corporal coerente reforça a mensagem; incoerência gera desconfiança. Escuta ativa: atenção plena, não interromper, fazer perguntas de aprofundamento, resumir o que o cliente disse.",
+    "Negociação ganha-ganha: amplie a torta antes de dividi-la (interesses por trás das posições), troque concessões de menor custo por maior valor, e use critérios objetivos (taxas de mercado, regulamentação BACEN). Concessionária máxima: nunca conceda sem retorno ('se eu conseguir X, o senhor fecha hoje?'). ZOPA (zona de possível acordo): negocie apenas dentro dela."
+   ]
+  },
+  {
    "titulo": "Orientações de estudo",
    "paragrafos": [
     "Bloco final do BB (questões 56–70): atendimento ao cliente, qualidade no serviço, perfil do agente comercial e noções de vendas. Cobrança conceitual e situacional da Cesgranrio.",

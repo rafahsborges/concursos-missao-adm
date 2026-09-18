@@ -10,6 +10,48 @@
  "ordem": {},
  "secoes": [
   {
+   "titulo": "Cap. 1 · RGPS e fontes",
+   "paragrafos": [
+    "O RGPS (Regime Geral de Previdência Social) é de contribuição obrigatória e cobertura compulsória (art. 201, CF). Fontes: Constituição (arts. 194 a 204), Lei 8.213/91 (LOPS), Decreto 3.048/99 (Regulamento), leis ordinárias posteriores e reformas (EC 103/2019 e alterações de 2023). Princípios da seguridade (art. 194): caridade, universalidade e equidade.",
+    "Previdência social é contributiva e distinta da assistência social (não contributiva: LOAS/BPC) e da saúde. O INSS administra o RGPS; a previdência complementar (RPC) é voluntária (Lei Complementar 109/2001)."
+   ]
+  },
+  {
+   "titulo": "Cap. 1 · Benefícios por incapacidade",
+   "paragrafos": [
+    "Auxílio por incapacidade (antigo auxílio-doença): incapacidade total e temporária; carência de 12 contribuições (exceto acidente de qualquer natureza ou doença grave especificada em lista). Aposentadoria por incapacidade permanente: incapacidade total e irreversível que impossibilite o trabalho. Auxílio-acidente: sequela que reduza a capacidade de trabalho, sem incapacidade total (mantém o vínculo e a renda).",
+    "Regras de transição (EC 103/2019): pedágio de 50% (atingir o tempo mínimo + 50% do que faltava em 2019) e pedágio de 100% (sem idade mínima, exigindo tempo + 100%). Aposentadoria por idade: urbana 65 (homem) e 62 (mulher), com carência reduzida para 15 anos (mulher) e idade reduzida para professores e segurados especiais."
+   ]
+  },
+  {
+   "titulo": "Cap. 1 · Segurados, carência e datas",
+   "paragrafos": [
+    "Segurados obrigatórios: empregado, avulso, contribuinte individual e segurado especial (agricultor familiar). Facultativo: maior de 16 anos que não exerça atividade remunerada. Excluídos do RGPS: servidores públicos titulares de cargo efetivo (RPPS próprio) e militares. Salário de contribuição = remuneração, limitado ao teto do RGPS.",
+    "Carência = número de contribuições mensais exigidas para cada benefício (não se exige para pensão por morte nem para auxílio-reclusão). DER (data de entrada do requerimento) inicia a tramitação; DIB (data de início do benefício) pode retroagir quando provado o início da condição (ex.: incapacidade anterior ao requerimento)."
+   ]
+  },
+  {
+   "titulo": "Cap. 2 · Princípios e atos administrativos",
+   "paragrafos": [
+    "Princípios expressos (art. 37, CF): legalidade, impessoalidade, moralidade, publicidade e eficiência. Implícitos: supremacia do interesse público, autotutela, continuidade do serviço público e motivação. Ato administrativo pressupõe competência, finalidade, forma, motivo e objeto; vício em qualquer um gera anulação (ou inexistência, quando faltar competência ou objeto).",
+    "Poderes administrativos: hierárquico (direção e controle entre agentes), disciplinar (adequado desempenho: advertência, suspensão, demissão, cassação de aposentadoria/pensão, destituição de cargo em comissão), regulamentar (limitado pelo art. 84 da CF e pelo princípio da legalidade) e de polícia (limitar ou intervir na atividade privada por interesse público)."
+   ]
+  },
+  {
+   "titulo": "Cap. 2 · Seguridade social na Constituição",
+   "paragrafos": [
+    "Art. 194: a seguridade social compreende previdência social, saúde e assistência social (integração e unidade entre as três). Princípios: universalidade da cobertura e do atendimento; uniformidade e equivalência dos benefícios; seletividade e distributividade na prestação; irredutibilidade do valor dos benefícios; equidade na forma de participação no custeio; diversidade da base de financiamento; caráter democrático e descentralizado da gestão.",
+    "Art. 201: a previdência social atende, por contribuição, a incapacidade, a involuntária desocupação, a maternidade, o encarceramento e a idade avançada. Art. 203: assistência social atende a quem dela necessitar (BPC/LOAS: um salário-mínimo mensal ao idoso 65+ ou pessoa com deficiência, com renda familiar per capita igual ou inferior a 1/4 do salário mínimo). Arts. 196 a 200: SUS — direito de todos e dever do Estado."
+   ]
+  },
+  {
+   "titulo": "Cap. 3 · SUS e HUs",
+   "paragrafos": [
+    "SUS: sistema único de saúde, descentralizado com direção única em cada esfera de governo, financiamento público e participação da comunidade. EBSERH: empresa pública vinculada ao Ministério da Saúde que administra Hospitais Universitários federais mediante contrato de gestão (Lei 12.550/2011), com autonomia gerencial.",
+    "Administração geral cobrada: planejamento (missão, visão, valores, planejamento estratégico), organização (estrutura formal, departamentalização, hierarquia), direção (liderança, motivação, comunicação) e controle (indicadores de desempenho, auditoria). Gestão da qualidade em saúde: acreditação hospitalar, segurança do paciente (cultura não punitiva) e classificação de risco no pronto atendimento."
+   ]
+  },
+  {
    "titulo": "Orientações de estudo",
    "paragrafos": [
     "Para o INSS (Cebraspe, itens 51–120): Direito Previdenciário (maior fatia), Direito Administrativo e Direito Constitucional — lei seca atualizada é indispensável. Para a EBSERH (FGV): Administração Pública, Direito Administrativo (Lei 8.112 e Lei 14.133) e Administração da Saúde/SUS.",

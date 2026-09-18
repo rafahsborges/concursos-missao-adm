@@ -8,6 +8,34 @@
  "ordem": {},
  "secoes": [
   {
+   "titulo": "Cap. 1 · SFN e papel do BACEN",
+   "paragrafos": [
+    "SFN: conjunto de instituições (bancos, financeiras, corretoras, seguradoras), mercados (de crédito, de capitais, cambial) e instrumentos (moeda, crédito, valores mobiliários). Órgãos normativos: CMN e CNPC (previdência complementar); fiscalizadores: BACEN, CVM e SUSEP; operadores: B3 (bolsa) e sistemas de pagamento (Pix/SPI, SELIC, STR).",
+    "BACEN: autoridade monetária — define a meta Selic via COPOM, regula e fiscaliza bancos, gerencia o Pix e as reservas internacionais, emite moeda. Comunicação: atas do COPOM e Relatório de Inflação. Pergunta clássica: quem fiscaliza os bancos comerciais? O BACEN. Quem define a política monetária em nível normativo? O CMN."
+   ]
+  },
+  {
+   "titulo": "Cap. 1 · Inflação e índices",
+   "paragrafos": [
+    "IPCA: índice oficial de preços ao consumidor (regime de metas), medido pelo IBGE; IPCA-15 é a prévia mensal. Outros índices: INPC, IGP-M (FGV, usado em reajustes de contrato e aluguel), IPCA-E, INCC. Regime de metas: o CMN fixa a meta anual (ex.: 3%) com banda de tolerância (±1,5 p.p.); o BACEN move a Selic para convergir a inflação à meta.",
+    "Selic alta: freia consumo e inflação, valoriza o câmbio (atrage investidores estrangeiros) e encarece o crédito; Selic baixa: barateia o crédito e estimula a atividade. Deflação (queda generalizada de preços) e estagflação (inflação alta com estagnação e desemprego) são cenários cobrados conceitualmente."
+   ]
+  },
+  {
+   "titulo": "Cap. 2 · Bolsa, renda fixa e variável",
+   "paragrafos": [
+    "B3 (Brasil, Bolsa, Balcão): bolsa onde negociam-se ações, fundos imobiliários, ETFs e derivativos; índices: Ibovespa (principais ações) e IGC (governança corporativa). Intermediação por corretoras; a CVM regula e protege o investidor (classificação de risco de fundos, lâminas informativas).",
+    "Renda fixa: títulos públicos (Tesouro Selic, IPCA+, Prefixado — via Tesouro Direto), CDB, LCI/LCA, debêntures. Renda variável: ações (ganhos: dividendos e ganho de capital), FIIs, ETFs. Fundos de investimento: cotas, taxa de administração e prazo de resgate (D+1 a D+30). Relação risco × retorno: ações > debêntures > CDB de grande banco > Tesouro Selic."
+   ]
+  },
+  {
+   "titulo": "Cap. 3 · Inovação e tendências",
+   "paragrafos": [
+    "Open Finance Brasil: compartilhamento de dados do cliente entre instituições mediante consentimento — fases: dados abertos, cadastro, transações, produtos e serviços. Fomenta concorrência e ofertas personalizadas. Pix: pagamento instantâneo do BACEN (desde nov/2020), 24/7, gratuito para PF, com mecanismos antifraude e funções como Pix Automático e Pix Troco.",
+    "Bancos digitais e fintechs (Nubank, Inter, C6): operação 100% digital, sem agências — pressionam a redução de tarifas do sistema tradicional. Criptoativos: regulados no Brasil pela Lei 14.478/2022 (marco legal); Bitcoin usa blockchain pública e descentralizada. Agenda social: educação financeira (ENEF — Estratégia Nacional de Educação Financeira, BACEN + MEC) e finanças sustentáveis (taxonomia sustentável, green bonds)."
+   ]
+  },
+  {
    "titulo": "Orientações de estudo",
    "paragrafos": [
     "Cobrança de conhecimentos gerais do SFN, do papel do Banco Central e de produtos bancários (Cesgranrio, questões 21–25). A FGV/EBSERH cobra atualidades de saúde pública.",

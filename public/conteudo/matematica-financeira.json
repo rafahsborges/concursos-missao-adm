@@ -8,6 +8,34 @@
  "ordem": {},
  "secoes": [
   {
+   "titulo": "Cap. 1 · Fórmula e regime de capitalização",
+   "paragrafos": [
+    "Juros compostos: M = C·(1+i)^t — o juro de cada período incide sobre o montante anterior (juros sobre juros). É o regime cobrado pela Cesgranrio na maioria das questões de BB. Fator (1+i)^t: memorize os fatores clássicos — (1,02)^6 ≈ 1,126; (1,03)^12 ≈ 1,426; (1,05)^10 ≈ 1,629; (1,10)^2 = 1,21; (1,10)^10 ≈ 2,594.",
+    "Diferença prática: em 12 meses, a 2% a.m., o simples daria 24% de juros; o composto dá ≈ 26,8% (fator 1,268). A prova usa tabelas ou fatores aproximados; treine as potências dos fatores mais comuns (1,01; 1,02; 1,05; 1,10)."
+   ]
+  },
+  {
+   "titulo": "Cap. 1 · Taxas equivalentes e nominais",
+   "paragrafos": [
+    "No regime composto, taxas equivalentes seguem a relação exponencial: (1+i_a) = (1+i_m)^12. Exemplos clássicos: 1% a.m. ≈ 12,68% a.a.; 2% a.m. ≈ 26,82% a.a.; 12% a.a. ≈ 0,95% a.m. Taxa nominal (ex.: 24% a.a. capitalizados mensalmente) exige conversão: 24/12 = 2% a.m., e a efetiva anual = 26,82%.",
+    "Taxa real × inflação: (1+i_nominal) = (1+i_real)·(1+inflação). Aproximação usada em prova: i_real ≈ i_nominal − inflação (valores pequenos). Taxa efetiva é a que realmente incide no período da capitalização."
+   ]
+  },
+  {
+   "titulo": "Cap. 2 · Desconto racional (por dentro) e comercial (por fora)",
+   "paragrafos": [
+    "Desconto racional simples: D = (N·i·t)/(1+i·t) — calculado sobre o VALOR ATUAL (o correto pela teoria). Desconto comercial simples: D = N·i·t — calculado sobre o VALOR NOMINAL, sempre maior que o racional; é o usado pelos bancos (cartões, duplicatas). Valor descontado: racional V = N/(1+i·t); comercial V = N·(1−i·t).",
+    "Relação entre eles (simples): D_comercial/D_racional = 1+i·t. Exemplo clássico: N = 1.000, 30 dias, 4% a.m.: comercial → D = 40, V = 960; racional → V = 1.000/1,04 ≈ 961,54, D ≈ 38,46. No composto, o desconto racional composto corresponde a 'descontar' o fator (1+i)^−t."
+   ]
+  },
+  {
+   "titulo": "Cap. 3 · SAC, Price e tabela",
+   "paragrafos": [
+    "SAC (Tabela Mútuo): amortização constante — A = C/n. Prestação decresce linearmente; juros caem a cada mês sobre o saldo devedor. Total de juros menor que no Price. 1ª prestação = A + C·i.",
+    "PRICE (Tabela Price): prestações constantes — P = C·i/(1−(1+i)^−n). No início, a parcela paga mais juros e pouca amortização (saldo devedor cai devagar); total de juros maior que no SAC. Tabela FGV/Cesgranrio: compare as duas em número de parcelas; 'metade do prazo' o saldo no SAC já é bem menor."
+   ]
+  },
+  {
    "titulo": "Orientações de estudo",
    "paragrafos": [
     "Bloco clássico do BB (Cesgranrio, questões 26–30): juros simples e compostos, descontos, taxas equivalentes e amortização. A banca valoriza contas diretas e aproximações.",

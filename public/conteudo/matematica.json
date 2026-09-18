@@ -8,6 +8,48 @@
  "ordem": {},
  "secoes": [
   {
+   "titulo": "Cap. 1 · Frações, MMC e MDC",
+   "paragrafos": [
+    "MMC é usado para somar/subtrair frações de denominadores diferentes e para coincidir de eventos periódicos ('dois ônibus partem de 6 em 6 e de 8 em 8 minutos; quando se encontram?'). MDC divide o maior pelo menor e repete com o resto até restar zero; serve para dividir quantidades em partes máximas iguais (problemas de 'maior número de caixas').",
+    "Frações: soma = mesmo denominador (MMC) e soma dos numeradores; multiplicação = numerador × numerador / denominador × denominador; divisão = multiplica pelo inverso. Problemas clássicos: 'gastei 2/5 e depois 1/3 do resto' — calcule sempre sobre o resto."
+   ]
+  },
+  {
+   "titulo": "Cap. 1 · Razão, proporção e regra de três",
+   "paragrafos": [
+    "Razão = divisão entre grandezas na ordem dada ('a razão de 12 para 18 é 12/18 = 2/3'). Proporção: igualdade de razões com a propriedade fundamental — produto dos extremos = produto dos meios (a/b = c/d → a·d = b·c). Dividir uma quantidade em partes proporcionais: some as razões e multiplique a fração de cada parte pelo total.",
+    "Regra de três: identifique grandezas diretamente proporcionais (crescem juntas) ou inversamente (uma cresce, a outra diminui — inverte a razão). Montagem: coloque a incógnita X no lugar do valor que se pede. Com 3 ou mais grandezas (regra de três composta), compare X com cada uma das outras separadamente."
+   ]
+  },
+  {
+   "titulo": "Cap. 2 · Porcentagem",
+   "paragrafos": [
+    "Frações úteis decoradas: 10% = 1/10; 20% = 1/5; 25% = 1/4; 50% = 1/2; 12,5% = 1/8; 5% = 1/20; 1% = 1/100. Aumento sucessivo: multiplique os fatores — aumento de 20% e depois 10% = 1,2 × 1,1 = 1,32 → aumento total de 32%, não 30%. Desconto sucessivo idem (0,8 × 0,9 = 0,72).",
+    "Variação percentual: (final − inicial)/inicial × 100. Valor inicial nunca é o final: 'de 80 para 100' = +25%, mas 'de 100 para 80' = −20%. Recuperar depois de queda exige aumento maior: −20% exige +25% para voltar ao original."
+   ]
+  },
+  {
+   "titulo": "Cap. 2 · Juros simples",
+   "paragrafos": [
+    "J = C · i · t (J = juros, C = capital, i = taxa na mesma unidade de t). Montante M = C + J. Taxa mensal com tempo em dias: use o comercial (mês = 30 dias) salvo indicação. Exemplo: C = 1.000, i = 2% a.m., t = 3 meses → J = 60; M = 1.060.",
+    "A taxa proporcional em juros simples é linear: 2% a.m. = 24% a.a.; 0,1% a.d. = 3% a.m. (30 dias). Cuidado clássico: taxa anual com capitalização simples não é equivalente à composta."
+   ]
+  },
+  {
+   "titulo": "Cap. 3 · Média, moda e mediana",
+   "paragrafos": [
+    "Média aritmética = soma dos valores ÷ quantidade. Média ponderada = soma (valor × peso) ÷ soma dos pesos (provas com pesos diferentes). Moda = valor mais frequente (pode não existir ou haver mais de uma). Mediana: ordene os valores e pegue o central (n ímpar) ou a média dos dois centrais (n par).",
+    "Problemas de mistura usam média ponderada: média de notas de turmas de tamanhos diferentes; concentração de misturas (regra da mistura/aligacão: quando a média está entre dois valores, a razão inversa das distâncias dá a proporção)."
+   ]
+  },
+  {
+   "titulo": "Cap. 3 · Análise combinatória básica (FGV)",
+   "paragrafos": [
+    "Princípio multiplicativo: se uma decisão tem m opções e outra tem n, há m × n resultados (sequência de escolhas). Permutação: arranjo de todos os elementos — P(n) = n! (senha com dígitos distintos, fila). Arranjo: ordem importa, subconjuntos de p de n — A(n,p) = n!/(n−p)! (pódio, cargos distintos). Combinação: ordem NÃO importa — C(n,p) = n!/(p!(n−p)!) (grupos, comissões, duplas).",
+    "Macete de decisão: pergunta 'trocar a ordem gera caso novo?' — sim = arranjo/permutação; não = combinação. Com repetição: permutação com elementos repetidos = n!/(a!b!...) (anagramas de BANANA = 6!/(3!2!))."
+   ]
+  },
+  {
    "titulo": "Orientações de estudo",
    "paragrafos": [
     "Para INSS, BB e EBSERH o núcleo é o mesmo: razão e proporção, regra de três, porcentagem, juros simples e noções de estatística. A FGV ainda cobra análise combinatória básica.",
