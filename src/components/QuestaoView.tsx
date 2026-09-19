@@ -2,6 +2,7 @@ import { useState } from 'react';
 import type { Questao } from '../types';
 import { trpc } from '../lib/trpc';
 import { temaDe } from '../lib/tags';
+import contextos from '../data/contextos.json';
 
 export interface IAProps {
   disponivel: boolean;
@@ -23,6 +24,13 @@ export default function QuestaoView({ questao: q, modo, marcada, corrigida, onMa
   const [carregando, setCarregando] = useState(false);
   const alts = q.tipo === 'certo_errado' ? { C: 'Certo', E: 'Errado' } : (q.alternativas ?? {});
   const letras = q.tipo === 'certo_errado' ? ['C', 'E'] : LETRAS.slice(0, Object.keys(alts).length);
+  const tema = temaDe(q);
+  const podeMarcar = !corrigida && modo !== 'revisao' && !q.anulada;
+  const [verTexto, setVerTexto] = useState(false);
+  const textoBase = q.contexto ? (contextos as Record<string, string>)[q.contexto] : undefined;
+
+  const acertou = corrigida && !q.anulada && marcada !== null && marcada === q.gabarito;
+  const errou = corrigida && !q.anulada && marcada !== null && marcada !== q.gabarito;
 
   const chamarIA = (fn: () => Promise<{ dica?: string; explicacao?: string }>) => {
     setCarregando(true);
@@ -34,39 +42,77 @@ export default function QuestaoView({ questao: q, modo, marcada, corrigida, onMa
   };
 
   return (
-    <article className="fade-in border-b border-[var(--line)] pb-6 mb-6">
-      <div className="flex items-baseline gap-3 mb-2">
-        <span className="eyebrow">
-          {q.disciplina}{temaDe(q) ? ' · ' + temaDe(q) : ''} · {q.banca} {q.ano} · Questão {q.numero}
-        </span>
-        {q.anulada && <span className="selo-anulada">ANULADA</span>}
+    <article className="fade-in pb-8 mb-2">
+      {/* cartão do enunciado */}
+      <div className="q-card">
+        <div className="flex flex-wrap items-center gap-2 mb-3">
+          <span className="q-chip">{q.disciplina}</span>
+          {tema && <span className="q-chip-2 tema">{tema}</span>}
+          <span className="q-chip-2">{q.banca} · {q.ano}</span>
+          {q.anulada && <span className="selo-anulada">ANULADA</span>}
+          <span className="ml-auto q-num">{q.numero}</span>
+        </div>
+        {textoBase ? (
+          <div className="q-contexto" style={{ margin: '0 0 1rem' }}>
+            <button
+              className="text-xs border-0 bg-transparent p-0 underline underline-offset-2"
+              onClick={() => setVerTexto(!verTexto)}
+            >
+              {verTexto ? 'Ocultar texto-base' : 'Mostrar texto-base (' + q.contexto + ')'}
+            </button>
+            {verTexto && (
+              <p className="mt-2 not-italic text-[0.95rem] leading-relaxed" style={{ fontStyle: 'normal' }}>
+                {textoBase}
+              </p>
+            )}
+          </div>
+        ) : (
+          q.contexto && <p className="q-contexto">Texto-base: {q.contexto}</p>
+        )}
+        {q.tipo === 'certo_errado' && (
+          <p className="eyebrow q-comando">Julgue o item a seguir — marque Certo ou Errado</p>
+        )}
+        <p className="q-enunciado">{q.enunciado}</p>
       </div>
-      {q.contexto && <p className="font-prova text-sm italic text-neutral-600 mb-2">Texto-base: {q.contexto}</p>}
-      <p className="font-prova text-[1.05rem] leading-relaxed mb-4">{q.enunciado}</p>
-      <div className="space-y-1">
+
+      {/* alternativas */}
+      <div className="mt-4 space-y-2">
         {letras.map((l) => {
           const certa = corrigida && q.gabarito === l;
           const errada = corrigida && marcada === l && marcada !== q.gabarito;
           const sel = marcada === l && !corrigida;
-          const podeMarcar = !corrigida && modo !== 'revisao' && !q.anulada;
           return (
             <button
               key={l}
               disabled={!podeMarcar}
               onClick={() => onMarcar?.(l)}
-              className={`w-full text-left px-3 py-2 flex gap-3 ${certa ? 'alt-certa' : ''} ${errada ? 'alt-errada' : ''} ${sel ? 'alt-marca' : ''}`}
+              className={`alt-btn ${certa ? 'alt-certa' : ''} ${errada ? 'alt-errada' : ''} ${sel ? 'alt-marca' : ''}`}
             >
-              <span className="font-prova font-semibold">({l})</span>
-              <span className="font-prova">{alts[l]}</span>
-              {certa && <span className="ml-auto text-xs font-bold" style={{ color: 'var(--green)' }}>gabarito</span>}
-              {errada && <span className="ml-auto text-xs font-bold" style={{ color: 'var(--red)' }}>sua resposta</span>}
+              <span className="alt-letra">({l})</span>
+              <span className="alt-texto font-prova">{alts[l]}</span>
+              {certa && <span className="ml-auto text-xs font-bold shrink-0" style={{ color: 'var(--green)' }}>gabarito</span>}
+              {errada && <span className="ml-auto text-xs font-bold shrink-0" style={{ color: 'var(--red)' }}>sua resposta</span>}
             </button>
           );
         })}
       </div>
-      {corrigida && q.anulada && <p className="eyebrow mt-3">Item anulado pela banca — não pontua.</p>}
+
+      {/* banner de resultado */}
+      {corrigida && acertou && (
+        <p className="q-banner ok">Você acertou — resposta oficial: {q.gabarito}.</p>
+      )}
+      {corrigida && errou && (
+        <p className="q-banner erro">Você errou — marcou {marcada}; gabarito oficial: {q.gabarito}.</p>
+      )}
+      {corrigida && q.anulada && (
+        <p className="q-banner info">Item anulado pela banca — não pontua.</p>
+      )}
+      {corrigida && marcada === null && !q.anulada && (
+        <p className="q-banner info">Sem resposta — gabarito oficial: {q.gabarito}.</p>
+      )}
+
       {ia?.disponivel && modo !== 'simulado' && (
-        <div className="flex gap-3 mt-3">
+        <div className="flex gap-4 mt-4 flex-wrap">
           {ia.mostrarDica && (
             <button
               className="hl-link border-0 bg-transparent text-sm"

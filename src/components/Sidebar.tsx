@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import type { Modulo } from '../types';
-import { usePerfis, criarPerfil, selecionarPerfil, removerPerfil, renomearPerfil, getTema, aplicarTema } from '../lib/store';
+import { usePerfis, criarPerfil, selecionarPerfil, removerPerfil, renomearPerfil, getTema, aplicarTema, proximoTema } from '../lib/store';
 
 const ITENS: { id: Modulo; rotulo: string }[] = [
   { id: 'inicio', rotulo: 'Início' },
@@ -19,7 +19,7 @@ export default function Sidebar({ modulo, ir }: { modulo: Modulo; ir: (m: Modulo
   const { perfis, ativo } = usePerfis();
   const nomeAtivo = perfis.find((p) => p.id === ativo)?.nome ?? '';
   const [aberto, setAberto] = useState(false);
-  const [tema, setTema] = useState<'claro' | 'escuro'>(getTema());
+  const [tema, setTema] = useState<'claro' | 'escuro' | 'contraste'>(getTema());
 
   const irEfechar = (m: Modulo) => {
     ir(m);
@@ -79,12 +79,12 @@ export default function Sidebar({ modulo, ir }: { modulo: Modulo; ir: (m: Modulo
         <button
           className="text-xs w-full mt-2"
           onClick={() => {
-            const t = tema === 'claro' ? 'escuro' : 'claro';
+            const t = proximoTema();
             aplicarTema(t);
             setTema(t);
           }}
         >
-          Tema: {tema === 'claro' ? 'claro' : 'escuro'}
+          Tema: {tema === 'claro' ? 'claro' : tema === 'escuro' ? 'escuro' : 'contraste'}
         </button>
       </div>
     </div>

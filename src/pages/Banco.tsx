@@ -25,6 +25,8 @@ export default function Banco({ preset }: { preset?: { concurso: string; discipl
   const [atual, setAtual] = useState(0);
   const [corrigida, setCorrigida] = useState<Set<string>>(new Set());
   const [pomo, setPomo] = useState<number | null>(null); // segundos restantes
+  const [foco, setFoco] = useState(false);
+  const [tamFonte, setTamFonte] = useState(1.12);
 
   useEffect(() => {
     if (pomo === null) return;
@@ -66,6 +68,10 @@ export default function Banco({ preset }: { preset?: { concurso: string; discipl
     [...new Set(Q.map((x) => x[campo]))].sort();
   const q = lista[atual];
 
+  useEffect(() => {
+    window.scrollTo({ top: 0 });
+  }, [atual]);
+
   // atalhos: A-E marca, setas navegam, Enter corrige
   useEffect(() => {
     const h = (e: KeyboardEvent) => {
@@ -104,7 +110,8 @@ export default function Banco({ preset }: { preset?: { concurso: string; discipl
     <div className="fade-in">
       <p className="eyebrow mb-1">Banco de questões · somente questões reais com gabarito oficial</p>
       <h2 className="font-prova text-3xl font-semibold mb-4">Resolver questões</h2>
-      <div className="flex flex-wrap gap-2 mb-4 items-center">
+      {!foco && (
+      <div className="q-filtros-sticky flex flex-wrap gap-2 mb-4 items-center">
         <select value={f.concurso} onChange={(e) => { setF({ ...f, concurso: e.target.value, prova: '' }); setAtual(0); }}>
           <option value="">Concurso: todos</option>
           {opcoes('concurso').map((o) => (<option key={o}>{o}</option>))}
@@ -151,7 +158,9 @@ export default function Banco({ preset }: { preset?: { concurso: string; discipl
           {pomo === null ? 'Pomodoro 25min' : Math.floor(pomo / 60) + ':' + String(pomo % 60).padStart(2, '0') + ' (parar)'}
         </button>
       </div>
-      <div className="flex flex-wrap gap-1 mb-6 max-h-28 overflow-y-auto">
+      )}
+      {!foco && (
+      <div className="flex flex-wrap gap-1 mb-1 max-h-28 overflow-y-auto">
         {lista.map((x, i) => {
           const r = prog.respostas[x.id];
           const cor = r == null ? 'bg-white' : x.anulada || r === x.gabarito ? 'alt-certa' : 'alt-errada';
@@ -166,8 +175,34 @@ export default function Banco({ preset }: { preset?: { concurso: string; discipl
           );
         })}
       </div>
+      )}
+      {!foco && (
+      <p className="flex flex-wrap gap-4 mb-5">
+        <span className="q-legenda"><span className="q-quadrado bg-white" /> não respondida</span>
+        <span className="q-legenda"><span className="q-quadrado alt-marca" /> respondida</span>
+        <span className="q-legenda"><span className="q-quadrado alt-certa" /> acertada</span>
+        <span className="q-legenda"><span className="q-quadrado alt-errada" /> errada</span>
+      </p>
+      )}
       {q ? (
         <>
+          <p className="text-sm mb-2 flex flex-wrap items-center gap-2">
+            <span className="font-prova font-semibold">Questão {atual + 1} de {lista.length}</span>
+            <button className="text-xs" onClick={() => setFoco(!foco)}>{foco ? 'Sair do foco' : 'Modo foco'}</button>
+            <button className="text-xs" onClick={() => setTamFonte((t) => Math.max(0.9, +(t - 0.08).toFixed(2)))}>A−</button>
+            <button className="text-xs" onClick={() => setTamFonte((t) => Math.min(1.6, +(t + 0.08).toFixed(2)))}>A+</button>
+            <span className="text-neutral-500">
+              {' — '}
+              {corrigida.has(q.id)
+                ? prog.respostas[q.id] === q.gabarito
+                  ? 'corrigida: acertou'
+                  : 'corrigida: errou'
+                : prog.respostas[q.id]
+                  ? 'respondida, aguardando correção'
+                  : 'não respondida'}
+            </span>
+          </p>
+          <div style={{ ['--qfont' as string]: tamFonte + 'rem' }}>
           <QuestaoView
             questao={q}
             modo="estudo"
@@ -181,6 +216,31 @@ export default function Banco({ preset }: { preset?: { concurso: string; discipl
               }}
             ia={ia?.disponivel ? { disponivel: true, mostrarDica: !corrigida.has(q.id), mostrarExplicar: corrigida.has(q.id) } : undefined}
           />
+          </div>
+          <div className="flex gap-2 flex-wrap mt-1 mb-2">
+            {(['favorita', 'duvida', 'revisar'] as const).map((b) => (
+              <button
+                key={b}
+                className={`text-xs ${(prog.bandeiras[q.id] ?? []).includes(b) ? 'btn-ink' : ''}`}
+                onClick={() => toggleBandeira(q.id, b)}
+              >
+                {b === 'favorita' ? 'Favorita' : b === 'duvida' ? 'Dúvida' : 'Revisar depois'}
+              </button>
+            ))}
+            {prog.srs[q.id] && (
+              <span className="text-xs text-neutral-500 self-center">SRS: revisar em {prog.srs[q.id].due}</span>
+            )}
+          </div>
+          <label className="block text-xs text-neutral-500 mb-4">
+            Minhas anotações
+            <textarea
+              className="w-full mt-1 p-2 font-prova text-sm"
+              rows={2}
+              placeholder="Ex.: errei por causa da vírgula antes de 'mas'…"
+              defaultValue={prog.anotacoes[q.id] ?? ''}
+              onBlur={(e) => definirAnotacao(q.id, e.target.value)}
+            />
+          </label>
           <div className="flex gap-3 flex-wrap">
             <button
               disabled={!prog.respostas[q.id] || corrigida.has(q.id)}
@@ -197,7 +257,9 @@ export default function Banco({ preset }: { preset?: { concurso: string; discipl
             <button disabled={atual === 0} onClick={() => setAtual(atual - 1)}>Anterior</button>
             <button disabled={atual >= lista.length - 1} onClick={() => setAtual(atual + 1)}>Próxima</button>
           </div>
-          <p className="text-xs text-neutral-500 mt-3">{atual + 1} de {lista.length}</p>
+          <p className="text-xs text-neutral-400 mt-3">
+            Atalhos: A–E responder · ← → navegar · Enter corrigir
+          </p>
         </>
       ) : (
         <p>Nenhuma questão com esses filtros.</p>

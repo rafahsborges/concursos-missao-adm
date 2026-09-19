@@ -123,9 +123,15 @@ export function registrarBackup(): void {
 }
 
 // tema global
-export type Tema = 'claro' | 'escuro';
+export type Tema = 'claro' | 'escuro' | 'contraste';
+const ORDEM_TEMA: Tema[] = ['claro', 'escuro', 'contraste'];
 export function getTema(): Tema {
-  return localStorage.getItem('reta-final-tema') === 'escuro' ? 'escuro' : 'claro';
+  const t = localStorage.getItem('reta-final-tema');
+  return t === 'escuro' || t === 'contraste' ? t : 'claro';
+}
+export function proximoTema(): Tema {
+  const i = ORDEM_TEMA.indexOf(getTema());
+  return ORDEM_TEMA[(i + 1) % ORDEM_TEMA.length];
 }
 export function aplicarTema(t: Tema): void {
   localStorage.setItem('reta-final-tema', t);

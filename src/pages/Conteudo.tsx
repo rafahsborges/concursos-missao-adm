@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import type { CapituloConteudo } from '../types';
 import { useProgresso, marcarLido } from '../lib/store';
 import { trpc } from '../lib/trpc';
@@ -24,11 +24,25 @@ export default function Conteudo({ iaDisponivel }: { iaDisponivel: boolean }) {
     setCap(null);
   }, [foco]);
 
+  // barra de progresso de leitura
+  const [progLeitura, setProgLeitura] = useState(0);
+  useEffect(() => {
+    const h = () => {
+      const total = document.documentElement.scrollHeight - window.innerHeight;
+      setProgLeitura(total > 0 ? Math.min(100, Math.round((window.scrollY / total) * 100)) : 0);
+    };
+    window.addEventListener('scroll', h, { passive: true });
+    return () => window.removeEventListener('scroll', h);
+  }, []);
+
   if (!idx) return <p>Carregando…</p>;
   if (!idx.disciplinas.length) {
     return (
       <div className="fade-in">
-        <p className="eyebrow mb-1">Conteúdo</p>
+        <div className="sticky top-0 z-10 bg-[var(--paper)] pt-1 pb-2 -mx-1 px-1">
+        <div className="barra"><div style={{ width: progLeitura + '%', background: 'var(--ink)' }} /></div>
+      </div>
+      <p className="eyebrow mb-1">Conteúdo</p>
         <h2 className="font-prova text-3xl font-semibold mb-4">Apostilas</h2>
         <p className="text-neutral-600">
           Os conteúdos das apostilas ainda não foram importados. A estrutura está pronta:
@@ -41,6 +55,9 @@ export default function Conteudo({ iaDisponivel }: { iaDisponivel: boolean }) {
 
   return (
     <div className="fade-in">
+      <div className="sticky top-0 z-10 bg-[var(--paper)] pt-1 pb-2 -mx-1 px-1">
+        <div className="barra"><div style={{ width: progLeitura + '%', background: 'var(--ink)' }} /></div>
+      </div>
       <p className="eyebrow mb-1">Conteúdo</p>
       <h2 className="font-prova text-3xl font-semibold mb-4">Apostilas por disciplina</h2>
       <div className="flex gap-2 mb-6 items-center">
@@ -75,9 +92,23 @@ export default function Conteudo({ iaDisponivel }: { iaDisponivel: boolean }) {
               </button>
             </div>
           </div>
+          <div className="flex flex-wrap gap-2 mb-5">
+            <span className="eyebrow self-center">Sumário:</span>
+            {cap.secoes.map((s, i) => (
+              <button
+                key={i}
+                className="text-xs"
+                onClick={() => document.getElementById('secao-' + i)?.scrollIntoView({ behavior: 'smooth' })}
+              >
+                {s.titulo.length > 42 ? s.titulo.slice(0, 42) + '…' : s.titulo}
+              </button>
+            ))}
+          </div>
           {cap.secoes.map((s, i) => (
-            <div key={i} className="mb-5">
-              <h4 className="font-prova font-semibold">{s.titulo}</h4>
+            <details key={i} id={'secao-' + i} className="mb-4 border-b border-[var(--line)] pb-3" open={i < 2}>
+              <summary className="cursor-pointer font-prova font-semibold text-[1.05rem]">
+                {s.titulo}
+              </summary>
               {s.paragrafos.map((p, j) => (
                 <p key={j} className="font-prova text-[1.02rem] leading-relaxed mt-2">{p}</p>
               ))}
@@ -102,7 +133,7 @@ export default function Conteudo({ iaDisponivel }: { iaDisponivel: boolean }) {
                   <p className="text-sm whitespace-pre-wrap">{txtIA || 'Gerando…'}</p>
                 </div>
               )}
-            </div>
+            </details>
           ))}
         </section>
       )}
