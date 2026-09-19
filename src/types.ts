@@ -42,6 +42,11 @@ export interface Progresso {
   metas: { diaria: number };                // meta diária de questões
   diasEstudo: Record<string, number>;       // dataISO -> ts (para streak)
   tempoQuestoes: Record<string, { seg: number; ts: number }>; // id -> tempo gasto
+  anotacoes: Record<string, string>;        // questãoId -> nota pessoal
+  bandeiras: Record<string, string[]>;      // questãoId -> [favorita|duvida|revisar]
+  srs: Record<string, { due: string; intervalo: number }>; // fila de revisão espaçada
+  diagnostico: { feito: boolean; quando: number; fracas: string[] } | null;
+  ultimoBackup: number;
 }
 
 export interface Perfil { id: string; nome: string; criadoEm: number; }

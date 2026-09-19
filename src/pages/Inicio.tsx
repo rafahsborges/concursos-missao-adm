@@ -1,7 +1,7 @@
 import banco from '../data/banco.json';
 import type { Questao, Modulo } from '../types';
 import { CONCURSOS } from '../data/concursos';
-import { useProgresso, calcularStreak, definirMeta } from '../lib/store';
+import { useProgresso, calcularStreak, definirMeta, registrarBackup } from '../lib/store';
 
 const Q = banco as Questao[];
 
@@ -38,6 +38,47 @@ export default function Inicio({ ir }: { ir: (m: Modulo) => void }) {
           );
         })}
       </div>
+      {!prog.diagnostico?.feito && resolvidas < 10 && (
+        <div className="border border-[var(--line)] p-4 mb-6 max-w-md">
+          <p className="font-prova font-semibold mb-1">Diagnóstico inicial</p>
+          <p className="text-sm text-neutral-600 mb-2">
+            Responda 15 questões sorteadas de todas as matérias para calibrar seu cronograma (as matérias mais
+            fracas entram primeiro no plano).
+          </p>
+          <button
+            className="btn-ink text-sm"
+            onClick={() => {
+              sessionStorage.setItem('rf-diagnostico', '1');
+              ir('simulado');
+            }}
+          >
+            Fazer diagnóstico agora
+          </button>
+        </div>
+      )}
+      {Date.now() - (prog.ultimoBackup ?? 0) > 7 * 24 * 3600 * 1000 && (
+        <div className="border border-[var(--line)] p-4 mb-6 max-w-md text-sm">
+          <span className="text-neutral-600">
+            Faz mais de 7 dias desde seu último backup do progresso.{' '}
+          </span>
+          <button
+            className="text-xs"
+            onClick={() => {
+              const blob = new Blob(
+                [JSON.stringify({ versao: 1, quando: Date.now(), progresso: prog }, null, 1)],
+                { type: 'application/json' }
+              );
+              const a = document.createElement('a');
+              a.href = URL.createObjectURL(blob);
+              a.download = 'progresso-reta-final.json';
+              a.click();
+              registrarBackup();
+            }}
+          >
+            Exportar agora
+          </button>
+        </div>
+      )}
       <div className="flex gap-6 mt-8 flex-wrap items-center">
         <button className="btn-ink" onClick={() => ir('banco')}>Continuar no banco de questões</button>
         <button onClick={() => ir('simulado')}>Fazer um simulado</button>

@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import banco from '../data/banco.json';
 import type { Questao, RespostaSimulado } from '../types';
 import QuestaoView from '../components/QuestaoView';
-import { registrarSimulado } from '../lib/store';
+import { registrarSimulado, getProgresso, registrarDiagnostico, useProgresso } from '../lib/store';
 import { pontuar } from '../lib/pontuacao';
 import { useAIStatus } from '../lib/trpc';
 
@@ -27,6 +27,18 @@ export default function Simulado() {
   const [restante, setRestante] = useState(0);
   const [inicio, setInicio] = useState(0);
   const finalizado = useRef(false);
+  const progSim = useProgresso();
+
+  useEffect(() => {
+    if (sessionStorage.getItem('rf-diagnostico') === '1') {
+      sessionStorage.removeItem('rf-diagnostico');
+      setModo('dinamico');
+      setConcurso('');
+      setNQuest(15);
+      setProvaReal(true);
+      setTempoMin(45);
+    }
+  }, []);
 
   const provas = useMemo(
     () => [...new Set(Q.filter((q) => q.concurso === concurso).map((q) => q.prova))],
@@ -67,6 +79,22 @@ export default function Simulado() {
       quando: Date.now(),
       detalhes,
     });
+    if (modo === 'dinamico' && qs.length >= 10 && !getProgresso().diagnostico?.feito) {
+      const porDisc = new Map<string, { total: number; certas: number }>();
+      for (const q of qs) {
+        if (q.anulada) continue;
+        const e = porDisc.get(q.disciplina) ?? { total: 0, certas: 0 };
+        e.total++;
+        if (resp[q.id] === q.gabarito) e.certas++;
+        porDisc.set(q.disciplina, e);
+      }
+      const fracas = [...porDisc.entries()]
+        .filter(([, v]) => v.total >= 2)
+        .sort((a, b) => a[1].certas / a[1].total - b[1].certas / b[1].total)
+        .slice(0, 3)
+        .map(([d]) => d);
+      if (fracas.length) registrarDiagnostico(fracas);
+    }
     setFase(provaReal ? 'folha' : 'revisao');
   }
 
@@ -220,6 +248,38 @@ export default function Simulado() {
           </label>
 
           <button className="btn-ink" onClick={iniciar}>Iniciar simulado</button>
+          <button
+            onClick={() => {
+              const pool = Q.filter(
+                (q) =>
+                  (!concurso || q.concurso === concurso) &&
+                  (modo !== 'personalizado' || !disciplina || q.disciplina === disciplina) &&
+                  (selecionadas === null || selecionadas.has(q.disciplina)) &&
+                  !q.anulada
+              );
+              const listaImp = modo === 'oficial'
+                ? pool.sort((a, b) => a.numero - b.numero)
+                : [...pool].sort(() => Math.random() - 0.5).slice(0, nQuest);
+              const html = '<html><head><title>Prova para impressão</title><style>body{font-family:Georgia,serif;max-width:700px;margin:24px auto;color:#000}h1{font-size:18px}p{font-size:13px;line-height:1.5}.alt{margin:4px 0 4px 16px;font-size:13px}.folha{margin-top:32px;border-top:1px solid #000;padding-top:8px;font-size:13px}</style></head><body>' +
+                '<h1>Simulado para impressão — ' + (concurso || 'Todos os concursos') + ' — ' + listaImp.length + ' questões</h1>' +
+                listaImp.map((q, i) =>
+                  '<p><b>' + (i + 1) + '.</b> (' + q.disciplina + ') ' + q.enunciado + '</p>' +
+                  Object.entries(q.alternativas ?? { C: 'Certo', E: 'Errado' })
+                    .map(([l, t]) => '<p class="alt">(' + l + ') ' + t + '</p>').join('')
+                ).join('') +
+                '<div class="folha"><b>Folha de respostas:</b><br>' +
+                listaImp.map((q, i) => (i + 1) + ' ___').join(' · ') + '</div>' +
+                '</body></html>';
+              const j = window.open('', '_blank');
+              if (j) {
+                j.document.write(html);
+                j.document.close();
+                j.print();
+              }
+            }}
+          >
+            Imprimir prova em PDF
+          </button>
           <p className="text-xs text-neutral-500">
             Sem IA durante a prova — apenas na revisão. Anuladas não entram no sorteio e não pontuam.
             {modo === 'dinamico' && ' O sorteio mistura questões e matérias a cada simulado.'}
@@ -228,6 +288,23 @@ export default function Simulado() {
       </div>
     );
   }
+
+  useEffect(() => {
+    if (fase !== 'prova') return;
+    const h = (e: KeyboardEvent) => {
+      const alvo = e.target as HTMLElement;
+      if (alvo.tagName === 'INPUT' || alvo.tagName === 'TEXTAREA' || alvo.tagName === 'SELECT') return;
+      const qq = qs[atual];
+      if (!qq) return;
+      const k = e.key.toUpperCase();
+      if (qq.tipo === 'multipla_escolha' && 'ABCDE'.includes(k) && !qq.anulada) setResp({ ...resp, [qq.id]: k });
+      else if (e.key === 'ArrowRight' && atual < qs.length - 1) setAtual(atual + 1);
+      else if (e.key === 'ArrowLeft' && !provaReal && atual > 0) setAtual(atual - 1);
+    };
+    window.addEventListener('keydown', h);
+    return () => window.removeEventListener('keydown', h);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [fase, atual, qs, resp, provaReal]);
 
   if (fase === 'prova') {
     const q = qs[atual];
@@ -317,14 +394,21 @@ export default function Simulado() {
         {qs.filter((q) => q.anulada).length} anuladas (sem pontuação)
       </p>
       {qs.map((q) => (
-        <QuestaoView
-          key={q.id}
-          questao={q}
-          modo="revisao"
-          marcada={resp[q.id] ?? null}
-          corrigida
-          ia={ia?.disponivel ? { disponivel: true, mostrarDica: false, mostrarExplicar: true } : undefined}
-        />
+        <div key={q.id}>
+          <QuestaoView
+            questao={q}
+            modo="revisao"
+            marcada={resp[q.id] ?? null}
+            corrigida
+            ia={ia?.disponivel ? { disponivel: true, mostrarDica: false, mostrarExplicar: true } : undefined}
+          />
+          {progSim.anotacoes[q.id] && (
+            <div className="bloco-ia p-3 -mt-4 mb-6">
+              <p className="eyebrow mb-1">Minha anotação</p>
+              <p className="text-sm whitespace-pre-wrap">{progSim.anotacoes[q.id]}</p>
+            </div>
+          )}
+        </div>
       ))}
       <button className="btn-ink" onClick={() => setFase('config')}>Novo simulado</button>
     </div>

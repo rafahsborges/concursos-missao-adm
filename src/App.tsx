@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import type { Modulo } from './types';
 import Sidebar from './components/Sidebar';
 import Inicio from './pages/Inicio';
@@ -12,6 +12,7 @@ import Tutor from './pages/Tutor';
 import Redacao from './pages/Redacao';
 import Desempenho from './pages/Desempenho';
 import { useAIStatus } from './lib/trpc';
+import { getTema, aplicarTema } from './lib/store';
 
 export interface PresetBanco { concurso: string; disciplina: string; }
 
@@ -19,6 +20,7 @@ export default function App() {
   const [modulo, setModulo] = useState<Modulo>('inicio');
   const [presetBanco, setPresetBanco] = useState<PresetBanco | null>(null);
   const ia = useAIStatus();
+  useEffect(() => aplicarTema(getTema()), []);
   return (
     <div className="min-h-screen">
       <Sidebar modulo={modulo} ir={setModulo} />
@@ -31,6 +33,7 @@ export default function App() {
               setPresetBanco({ concurso, disciplina });
               setModulo('banco');
             }}
+            irSimulado={() => setModulo('simulado')}
           />
         )}
         {modulo === 'conteudo' && <Conteudo iaDisponivel={Boolean(ia?.disponivel)} />}

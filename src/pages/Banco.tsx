@@ -2,12 +2,13 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import banco from '../data/banco.json';
 import type { Questao } from '../types';
 import QuestaoView from '../components/QuestaoView';
-import { useProgresso, responder, registrarDiaEstudo, registrarTempoQuestao } from '../lib/store';
+import { useProgresso, responder, registrarDiaEstudo, registrarTempoQuestao, definirAnotacao, toggleBandeira, registrarSrs } from '../lib/store';
+import { temaDe, temasDaDisciplina } from '../lib/tags';
 import { useAIStatus } from '../lib/trpc';
 
 const Q = banco as Questao[];
 
-interface Filtro { concurso: string; prova: string; disciplina: string; status: string; busca: string; anuladas: boolean; }
+interface Filtro { concurso: string; prova: string; disciplina: string; tema: string; bandeira: string; status: string; busca: string; anuladas: boolean; }
 
 function norm(s: string): string {
   return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
@@ -16,13 +17,25 @@ function norm(s: string): string {
 export default function Banco({ preset }: { preset?: { concurso: string; disciplina: string } | null }) {
   useEffect(() => {
     if (preset) {
-      setF({ concurso: preset.concurso, prova: '', disciplina: preset.disciplina, status: 'todas', busca: '', anuladas: false });
+      setF({ concurso: preset.concurso, prova: '', disciplina: preset.disciplina, tema: '', bandeira: '', status: 'todas', busca: '', anuladas: false });
       setAtual(0);
     }
   }, [preset]);
-  const [f, setF] = useState<Filtro>({ concurso: '', prova: '', disciplina: '', status: 'todas', busca: '', anuladas: false });
+  const [f, setF] = useState<Filtro>({ concurso: '', prova: '', disciplina: '', tema: '', bandeira: '', status: 'todas', busca: '', anuladas: false });
   const [atual, setAtual] = useState(0);
   const [corrigida, setCorrigida] = useState<Set<string>>(new Set());
+  const [pomo, setPomo] = useState<number | null>(null); // segundos restantes
+
+  useEffect(() => {
+    if (pomo === null) return;
+    if (pomo <= 0) {
+      alert('Pomodoro concluído. Faça uma pausa de 5 minutos.');
+      setPomo(null);
+      return;
+    }
+    const t = setTimeout(() => setPomo(pomo - 1), 1000);
+    return () => clearTimeout(t);
+  }, [pomo]);
   const prog = useProgresso();
   const ia = useAIStatus();
 
@@ -32,6 +45,12 @@ export default function Banco({ preset }: { preset?: { concurso: string; discipl
         if (f.concurso && q.concurso !== f.concurso) return false;
         if (f.prova && q.prova !== f.prova) return false;
         if (f.disciplina && q.disciplina !== f.disciplina) return false;
+        if (f.tema && temaDe(q) !== f.tema) return false;
+        if (f.bandeira && !(prog.bandeiras[q.id] ?? []).includes(f.bandeira)) return false;
+        if (f.status === 'srs') {
+          const due = prog.srs[q.id]?.due;
+          if (!due || due > new Date().toISOString().slice(0, 10)) return false;
+        }
         if (!f.anuladas && q.anulada) return false;
         if (f.busca && !norm(q.enunciado).includes(norm(f.busca))) return false;
         const r = prog.respostas[q.id];
@@ -46,6 +65,27 @@ export default function Banco({ preset }: { preset?: { concurso: string; discipl
   const opcoes = (campo: 'concurso' | 'prova' | 'disciplina'): string[] =>
     [...new Set(Q.map((x) => x[campo]))].sort();
   const q = lista[atual];
+
+  // atalhos: A-E marca, setas navegam, Enter corrige
+  useEffect(() => {
+    const h = (e: KeyboardEvent) => {
+      const alvo = e.target as HTMLElement;
+      if (alvo.tagName === 'INPUT' || alvo.tagName === 'TEXTAREA' || alvo.tagName === 'SELECT') return;
+      const qq = lista[atual];
+      if (!qq) return;
+      const k = e.key.toUpperCase();
+      if (qq.tipo === 'multipla_escolha' && 'ABCDE'.includes(k) && !corrigida.has(qq.id) && !qq.anulada) {
+        responder(qq.id, k);
+        registrarDiaEstudo();
+      } else if (e.key === 'ArrowLeft' && atual > 0) setAtual(atual - 1);
+      else if (e.key === 'ArrowRight' && atual < lista.length - 1) setAtual(atual + 1);
+      else if (e.key === 'Enter' && prog.respostas[qq.id] && !corrigida.has(qq.id)) {
+        setCorrigida(new Set(corrigida).add(qq.id));
+      }
+    };
+    window.addEventListener('keydown', h);
+    return () => window.removeEventListener('keydown', h);
+  }, [atual, lista, corrigida, prog.respostas]);
 
   // cronômetro por questão: registra o tempo ao trocar de questão
   const tempoRef = useRef<{ id: string; ini: number } | null>(null);
@@ -79,11 +119,24 @@ export default function Banco({ preset }: { preset?: { concurso: string; discipl
           <option value="">Disciplina: todas</option>
           {opcoes('disciplina').map((o) => (<option key={o}>{o}</option>))}
         </select>
+        {f.disciplina && temasDaDisciplina(f.disciplina).length > 0 && (
+          <select value={f.tema} onChange={(e) => { setF({ ...f, tema: e.target.value }); setAtual(0); }}>
+            <option value="">Tema: todos</option>
+            {temasDaDisciplina(f.disciplina).map((t) => (<option key={t}>{t}</option>))}
+          </select>
+        )}
+        <select value={f.bandeira} onChange={(e) => { setF({ ...f, bandeira: e.target.value }); setAtual(0); }}>
+          <option value="">Bandeira: todas</option>
+          <option value="favorita">Favoritas</option>
+          <option value="duvida">Dúvidas</option>
+          <option value="revisar">Revisar depois</option>
+        </select>
         <select value={f.status} onChange={(e) => { setF({ ...f, status: e.target.value }); setAtual(0); }}>
           <option value="todas">Status: todas</option>
           <option value="nao">Não respondidas</option>
           <option value="certas">Acertadas</option>
           <option value="erradas">Erradas</option>
+          <option value="srs">Revisar hoje (SRS)</option>
         </select>
         <input
           placeholder="Buscar no enunciado…"
@@ -94,6 +147,9 @@ export default function Banco({ preset }: { preset?: { concurso: string; discipl
           <input type="checkbox" checked={f.anuladas} onChange={(e) => { setF({ ...f, anuladas: e.target.checked }); setAtual(0); }} />
           incluir anuladas
         </label>
+        <button className="text-sm" onClick={() => setPomo(pomo === null ? 1500 : null)}>
+          {pomo === null ? 'Pomodoro 25min' : Math.floor(pomo / 60) + ':' + String(pomo % 60).padStart(2, '0') + ' (parar)'}
+        </button>
       </div>
       <div className="flex flex-wrap gap-1 mb-6 max-h-28 overflow-y-auto">
         {lista.map((x, i) => {
@@ -129,7 +185,12 @@ export default function Banco({ preset }: { preset?: { concurso: string; discipl
             <button
               disabled={!prog.respostas[q.id] || corrigida.has(q.id)}
               className="btn-ink"
-              onClick={() => setCorrigida(new Set(corrigida).add(q.id))}
+              onClick={() => {
+                setCorrigida(new Set(corrigida).add(q.id));
+                const r = prog.respostas[q.id];
+                if (r) registrarSrs(q.id, r === q.gabarito);
+                registrarDiaEstudo();
+              }}
             >
               Corrigir com gabarito oficial
             </button>

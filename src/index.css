@@ -25,3 +25,26 @@ button:disabled { opacity: .45; cursor: not-allowed; }
 .btn-red { color: var(--red); border-color: var(--red); background: #fff; }
 .barra { height: 10px; background: var(--paper-2); border: 1px solid var(--line); }
 .barra > div { height: 100%; }
+
+[data-tema="escuro"] {
+  --paper: #141414;
+  --paper-2: #1e1e1e;
+  --ink: #e8e8e8;
+  --line: #3a3a3a;
+  --hl: #d9d94f;
+}
+[data-tema="escuro"] body { color: var(--ink); }
+[data-tema="escuro"] button,
+[data-tema="escuro"] input,
+[data-tema="escuro"] select,
+[data-tema="escuro"] textarea { background: #1e1e1e; color: var(--ink); border-color: #3a3a3a; }
+[data-tema="escuro"] .btn-ink { background: #e8e8e8; color: #141414; border-color: #e8e8e8; }
+[data-tema="escuro"] .btn-red { background: #1e1e1e; }
+[data-tema="escuro"] .eyebrow { color: #9a9a9a; }
+[data-tema="escuro"] .text-neutral-600,
+[data-tema="escuro"] .text-neutral-500 { color: #a3a3a3 !important; }
+[data-tema="escuro"] .alt-certa { background: #1d3a26 !important; }
+[data-tema="escuro"] .alt-errada { background: #3d2220 !important; }
+[data-tema="escuro"] .bg-white { background: #1e1e1e !important; }
+[data-tema="escuro"] .border-neutral-200,
+[data-tema="escuro"] .outline-black { border-color: #3a3a3a; }

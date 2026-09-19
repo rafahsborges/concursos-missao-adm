@@ -7,7 +7,13 @@ import { useProgresso, marcarCronograma } from '../lib/store';
 
 const Q = banco as Questao[];
 
-export default function Cronograma({ irBanco }: { irBanco: (concurso: string, disciplina: string) => void }) {
+export default function Cronograma({
+  irBanco,
+  irSimulado,
+}: {
+  irBanco: (concurso: string, disciplina: string) => void;
+  irSimulado: () => void;
+}) {
   const concursos = useMemo(() => [...new Set(Q.map((q) => q.concurso))].sort(), []);
   const [concurso, setConcurso] = useState('');
   const [inicio, setInicio] = useState(new Date().toISOString().slice(0, 10));
@@ -23,7 +29,11 @@ export default function Cronograma({ irBanco }: { irBanco: (concurso: string, di
     }
     return m;
   }, [prog.respostas]);
-  const plano = useMemo(() => gerarCronograma(concurso, inicio, erradas), [concurso, inicio, erradas]);
+  const prioridade = useMemo(
+    () => new Set(prog.diagnostico?.feito ? prog.diagnostico.fracas : []),
+    [prog.diagnostico]
+  );
+  const plano = useMemo(() => gerarCronograma(concurso, inicio, erradas, prioridade), [concurso, inicio, erradas, prioridade]);
 
   const totalItens = plano.reduce((s, d) => s + d.itens.length, 0);
   const feitos = plano.reduce(
@@ -89,20 +99,26 @@ export default function Cronograma({ irBanco }: { irBanco: (concurso: string, di
                     title={feito ? 'Desmarcar' : 'Marcar como concluído'}
                   />
                   <span className={`eyebrow w-16 ${it.tipo === 'estudo' ? '' : 'text-neutral-400'}`}>
-                    {it.tipo === 'estudo' ? 'Estudo' : 'Revisão'}
+                    {it.tipo === 'estudo' ? 'Estudo' : it.tipo === 'revisao' ? 'Revisão' : 'Simulado'}
                   </span>
                   <div className="flex-1">
                     <span className={`font-prova font-semibold ${feito ? 'line-through' : ''}`}>{it.disciplina}</span>
                     <span className="block text-xs text-neutral-500">
-                      {it.concurso} · {Math.floor(it.duracaoMin / 60)}h de estudo ·{' '}
-                      {it.tipo === 'revisao' && it.erradas > 0
+                      {it.concurso} · {Math.floor(it.duracaoMin / 60)}h ·{' '}
+                      {it.tipo === 'simulado'
+                        ? 'prova completa (modo oficial recomendado)'
+                        : it.tipo === 'revisao' && it.erradas > 0
                         ? 'caderno de erros: ' + it.erradas + ' questão(ões) errada(s) para revisar'
                         : 'sugerido: ' + it.questoes + ' questões'}
                     </span>
                   </div>
-                  <button className="text-xs" onClick={() => irBanco(it.concurso, it.disciplina)}>
-                    Resolver questões
-                  </button>
+                  {it.tipo === 'simulado' ? (
+                    <button className="text-xs btn-ink" onClick={irSimulado}>Fazer simulado</button>
+                  ) : (
+                    <button className="text-xs" onClick={() => irBanco(it.concurso, it.disciplina)}>
+                      Resolver questões
+                    </button>
+                  )}
                 </div>
               );
             })}

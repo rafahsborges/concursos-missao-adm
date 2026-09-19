@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import type { Modulo } from '../types';
-import { usePerfis, criarPerfil, selecionarPerfil, removerPerfil, renomearPerfil } from '../lib/store';
+import { usePerfis, criarPerfil, selecionarPerfil, removerPerfil, renomearPerfil, getTema, aplicarTema } from '../lib/store';
 
 const ITENS: { id: Modulo; rotulo: string }[] = [
   { id: 'inicio', rotulo: 'Início' },
@@ -19,6 +19,7 @@ export default function Sidebar({ modulo, ir }: { modulo: Modulo; ir: (m: Modulo
   const { perfis, ativo } = usePerfis();
   const nomeAtivo = perfis.find((p) => p.id === ativo)?.nome ?? '';
   const [aberto, setAberto] = useState(false);
+  const [tema, setTema] = useState<'claro' | 'escuro'>(getTema());
 
   const irEfechar = (m: Modulo) => {
     ir(m);
@@ -74,6 +75,16 @@ export default function Sidebar({ modulo, ir }: { modulo: Modulo; ir: (m: Modulo
           }}
         >
           Excluir
+        </button>
+        <button
+          className="text-xs w-full mt-2"
+          onClick={() => {
+            const t = tema === 'claro' ? 'escuro' : 'claro';
+            aplicarTema(t);
+            setTema(t);
+          }}
+        >
+          Tema: {tema === 'claro' ? 'claro' : 'escuro'}
         </button>
       </div>
     </div>

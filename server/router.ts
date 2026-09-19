@@ -113,6 +113,14 @@ export const appRouter = t.router({
     return { ok: true };
   }),
 
+  resumoSemanal: t.procedure
+    .input(z.object({ resumo: z.string().max(6000) }))
+    .mutation(async ({ input }) => ({
+      resumo: await ai.chat(
+        PROF,
+        'Com base nos dados semanais do aluno a seguir (JSON com acertos por disciplina, simulados e sequência de estudo), escreva um resumo em PT-BR com: (1) o que ele estudou, (2) pontos fortes, (3) fraquezas, (4) plano objetivo para a próxima semana. Sem emojis, no máximo 12 linhas.\nDados:\n' + input.resumo),
+    })),
+
   statsIA: t.procedure.query(() => {
     const d = getDados();
     return {

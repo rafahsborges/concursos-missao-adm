@@ -20,7 +20,7 @@ export interface ItemCronograma {
   id: string;
   dia: number;
   data: string; // ISO
-  tipo: 'estudo' | 'revisao';
+  tipo: 'estudo' | 'revisao' | 'simulado';
   disciplina: string;
   concurso: string;
   duracaoMin: number;
@@ -75,9 +75,13 @@ function addDiasUteis(base: Date, n: number): Date {
   return d;
 }
 
-export function gerarCronograma(concurso: string, inicioISO: string, erradasPorTopico?: Record<string, number>): DiaCronograma[] {
+export function gerarCronograma(concurso: string, inicioISO: string, erradasPorTopico?: Record<string, number>, prioridade?: Set<string>): DiaCronograma[] {
   const base = proximoDiaUtil(dataBase(inicioISO));
-  const topicosLista = topicos(concurso);
+  let topicosLista = topicos(concurso);
+  if (prioridade && prioridade.size > 0) {
+    topicosLista = [...topicosLista].sort((a, b) =>
+      (prioridade.has(a.disciplina) ? 0 : 1) - (prioridade.has(b.disciplina) ? 0 : 1));
+  }
   const dataDoDia = (dia: number): string => addDiasUteis(base, dia).toISOString().slice(0, 10);
 
   interface Pendente { topico: Topico; tipo: 'estudo' | 'revisao'; due: number; }
@@ -96,6 +100,21 @@ export function gerarCronograma(concurso: string, inicioISO: string, erradasPorT
       .sort((a, b) =>
         a.tipo === b.tipo ? a.due - b.due : a.tipo === 'revisao' ? -1 : 1);
 
+    // simulado semanal: a cada 5 dias úteis, sexta-feira de prova completa (3h)
+    if (diaIdx % 5 === 4) {
+      itens.push({
+        id: 'SIMULADO|' + diaIdx,
+        dia: diaIdx,
+        data: dataDoDia(diaIdx),
+        tipo: 'simulado',
+        disciplina: concurso || 'Todos os concursos',
+        concurso: concurso || 'Todos os concursos',
+        duracaoMin: DIA_MIN,
+        questoes: 0,
+        erradas: 0,
+      });
+      cap = 0;
+    }
     const chavesDoDia = new Set<string>(); // impede repetição da mesma matéria no mesmo dia
     for (const p of elegiveis) {
       const chave = p.topico.concurso + '|' + p.topico.disciplina;

@@ -72,7 +72,65 @@ export function resetPerfil(id: string): void {
 export const vazio = (): Progresso => ({
   respostas: {}, respostasIA: {}, simulados: [], lidos: {}, cronograma: {},
   metas: { diaria: 20 }, diasEstudo: {}, tempoQuestoes: {},
+  anotacoes: {}, bandeiras: {}, srs: {}, diagnostico: null, ultimoBackup: 0,
 });
+const SOMA_INTERVALO = [1, 3, 7, 14, 30]; // SM-2 simplificado
+
+export function definirAnotacao(id: string, texto: string): void {
+  const p = getProgresso();
+  if (texto.trim()) p.anotacoes[id] = texto;
+  else delete p.anotacoes[id];
+  setProgresso(p);
+}
+export function toggleBandeira(id: string, tipo: string): void {
+  const p = getProgresso();
+  const atuais = new Set(p.bandeiras[id] ?? []);
+  if (atuais.has(tipo)) atuais.delete(tipo);
+  else atuais.add(tipo);
+  if (atuais.size) p.bandeiras[id] = [...atuais];
+  else delete p.bandeiras[id];
+  setProgresso(p);
+}
+export function registrarSrs(id: string, acertou: boolean): void {
+  const p = getProgresso();
+  const hoje = new Date();
+  if (acertou) {
+    const atual = p.srs[id];
+    if (!atual) return;
+    const idx = Math.min(SOMA_INTERVALO.indexOf(atual.intervalo) + 1, SOMA_INTERVALO.length - 1);
+    if (atual.intervalo >= 30) delete p.srs[id]; // graduada
+    else {
+      const due = new Date(hoje);
+      due.setDate(due.getDate() + SOMA_INTERVALO[idx]);
+      p.srs[id] = { due: due.toISOString().slice(0, 10), intervalo: SOMA_INTERVALO[idx] };
+    }
+  } else {
+    const due = new Date(hoje);
+    due.setDate(due.getDate() + 1);
+    p.srs[id] = { due: due.toISOString().slice(0, 10), intervalo: 1 };
+  }
+  setProgresso(p);
+}
+export function registrarDiagnostico(fracas: string[]): void {
+  const p = getProgresso();
+  p.diagnostico = { feito: true, quando: Date.now(), fracas };
+  setProgresso(p);
+}
+export function registrarBackup(): void {
+  const p = getProgresso();
+  p.ultimoBackup = Date.now();
+  setProgresso(p);
+}
+
+// tema global
+export type Tema = 'claro' | 'escuro';
+export function getTema(): Tema {
+  return localStorage.getItem('reta-final-tema') === 'escuro' ? 'escuro' : 'claro';
+}
+export function aplicarTema(t: Tema): void {
+  localStorage.setItem('reta-final-tema', t);
+  document.documentElement.dataset.tema = t;
+}
 const hojeISO = (): string => new Date().toISOString().slice(0, 10);
 
 export function registrarDiaEstudo(): void {

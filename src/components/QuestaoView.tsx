@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import type { Questao } from '../types';
 import { trpc } from '../lib/trpc';
+import { temaDe } from '../lib/tags';
 
 export interface IAProps {
   disponivel: boolean;
@@ -35,7 +36,9 @@ export default function QuestaoView({ questao: q, modo, marcada, corrigida, onMa
   return (
     <article className="fade-in border-b border-[var(--line)] pb-6 mb-6">
       <div className="flex items-baseline gap-3 mb-2">
-        <span className="eyebrow">{q.disciplina} · {q.banca} {q.ano} · Questão {q.numero}</span>
+        <span className="eyebrow">
+          {q.disciplina}{temaDe(q) ? ' · ' + temaDe(q) : ''} · {q.banca} {q.ano} · Questão {q.numero}
+        </span>
         {q.anulada && <span className="selo-anulada">ANULADA</span>}
       </div>
       {q.contexto && <p className="font-prova text-sm italic text-neutral-600 mb-2">Texto-base: {q.contexto}</p>}
