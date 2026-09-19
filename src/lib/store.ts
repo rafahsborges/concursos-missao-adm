@@ -73,6 +73,7 @@ export const vazio = (): Progresso => ({
   respostas: {}, respostasIA: {}, simulados: [], lidos: {}, cronograma: {},
   metas: { diaria: 20 }, diasEstudo: {}, tempoQuestoes: {},
   anotacoes: {}, bandeiras: {}, srs: {}, diagnostico: null, ultimoBackup: 0,
+  anotSecoes: {}, destaques: {}, flash: {},
 });
 const SOMA_INTERVALO = [1, 3, 7, 14, 30]; // SM-2 simplificado
 
@@ -119,6 +120,42 @@ export function registrarDiagnostico(fracas: string[]): void {
 export function registrarBackup(): void {
   const p = getProgresso();
   p.ultimoBackup = Date.now();
+  setProgresso(p);
+}
+
+export function definirAnotSecao(id: string, texto: string): void {
+  const p = getProgresso();
+  if (texto.trim()) p.anotSecoes[id] = texto;
+  else delete p.anotSecoes[id];
+  setProgresso(p);
+}
+export function toggleDestaque(secaoId: string, trecho: string): void {
+  const p = getProgresso();
+  const lista = new Set(p.destaques[secaoId] ?? []);
+  if (lista.has(trecho)) lista.delete(trecho);
+  else lista.add(trecho);
+  if (lista.size) p.destaques[secaoId] = [...lista];
+  else delete p.destaques[secaoId];
+  setProgresso(p);
+}
+export function registrarFlashSrs(id: string, acertou: boolean): void {
+  const p = getProgresso();
+  const hoje = new Date();
+  if (acertou) {
+    const atual = p.flash[id];
+    if (!atual) return;
+    const idx = Math.min(SOMA_INTERVALO.indexOf(atual.intervalo) + 1, SOMA_INTERVALO.length - 1);
+    if (atual.intervalo >= 30) delete p.flash[id];
+    else {
+      const due = new Date(hoje);
+      due.setDate(due.getDate() + SOMA_INTERVALO[idx]);
+      p.flash[id] = { due: due.toISOString().slice(0, 10), intervalo: SOMA_INTERVALO[idx], ts: Date.now() };
+    }
+  } else {
+    const due = new Date(hoje);
+    due.setDate(due.getDate() + 1);
+    p.flash[id] = { due: due.toISOString().slice(0, 10), intervalo: 1, ts: Date.now() };
+  }
   setProgresso(p);
 }
 

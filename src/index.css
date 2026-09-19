@@ -141,3 +141,19 @@ button:disabled { opacity: .45; cursor: not-allowed; }
 [data-tema="contraste"] .hl-link { color: #ff0; }
 [data-tema="contraste"] .btn-ink { background: #ff0 !important; color: #000; border-color: #ff0; }
 [data-tema="contraste"] .selo-anulada { background: #ff0; color: #000; }
+
+/* destaques do usuário e modo leitura */
+.hl-user { background: var(--hl); padding: 0 2px; color: #000; }
+.modo-leitura { max-width: 62ch; margin: 0 auto; }
+.modo-leitura .font-prova { font-size: 1.12rem; line-height: 1.95; }
+.modo-leitura summary { font-size: 1.2rem; }
+
+/* flashcards do conteúdo */
+.flash-card {
+  border: 1px solid var(--line); background: var(--paper);
+  min-height: 200px; padding: 2rem; display: flex; align-items: center; justify-content: center;
+  text-align: center; cursor: pointer; font-family: 'Source Serif 4', serif; font-size: 1.15rem; line-height: 1.7;
+}
+[data-tema="escuro"] .flash-card { background: var(--paper-2); }
+.flash-verso { color: #555; font-size: 1rem; }
+[data-tema="escuro"] .flash-verso { color: #a3a3a3; }

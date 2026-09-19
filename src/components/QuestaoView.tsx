@@ -110,6 +110,12 @@ export default function QuestaoView({ questao: q, modo, marcada, corrigida, onMa
       {corrigida && marcada === null && !q.anulada && (
         <p className="q-banner info">Sem resposta — gabarito oficial: {q.gabarito}.</p>
       )}
+      {corrigida && q.comentario && (
+        <div className="bloco-ia mt-3 p-4" style={{ borderLeftColor: 'var(--ink)' }}>
+          <p className="eyebrow mb-2">Comentário do professor</p>
+          <p className="text-sm whitespace-pre-wrap">{q.comentario}</p>
+        </div>
+      )}
 
       {ia?.disponivel && modo !== 'simulado' && (
         <div className="flex gap-4 mt-4 flex-wrap">

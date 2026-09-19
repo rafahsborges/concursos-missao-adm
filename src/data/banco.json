@@ -13,7 +13,8 @@
   "enunciado": "que explicam a ampliação da presença de mulheres no mercado de trabalho. Os serviços de cuidados fornecidos na América Latina",
   "alternativas": null,
   "gabarito": "E",
-  "anulada": false
+  "anulada": false,
+  "comentario": "Texto-base Cebraspe: a resposta está no texto, não no conhecimento. 'Que explicam a ampliação...' — procure o trecho que lista as causas (participação feminina + serviços de cuidado). Julgue o item pelo que o texto AFIRMA literalmente; se ele generalizar ('a única causa', 'sempre'), marque ERRADO."
  },
  {
   "id": "INSS2022-CB1-Q002",
@@ -29,7 +30,8 @@
   "enunciado": "diferenciam-se dos providos em países do hemisfério norte. Por mencionar dados, articular depoimentos e expor",
   "alternativas": null,
   "gabarito": "C",
-  "anulada": false
+  "anulada": false,
+  "comentario": "Gênero textual: o item mistura 'dados + depoimentos + argumentos' com uma classificação. Se disse 'predominantemente descritivo', ERRADO — com argumentos e dados comparativos o texto é DISSERTATIVO-expositivo/analítico. Dica: descrição = características sem opinião; este texto EXPLICA fenômeno social = dissertação."
  },
  {
   "id": "INSS2022-CB1-Q003",
@@ -45,7 +47,8 @@
   "enunciado": "argumentos, o texto configura-se como predominantemente descritivo. A profissionalização do trabalho de cuidados nos últimos",
   "alternativas": null,
   "gabarito": "E",
-  "anulada": false
+  "anulada": false,
+  "comentario": "Narração vs dissertação: a profissionalização do trabalho de cuidados exposta COM argumentos = texto DISSERTATIVO. Em itens Cebraspe de básicos, a pegadinha sempre é trocar 'dissertativo' por 'narrativo' (não há personagem/tempo cronológico) ou 'injuntivo' (sem instruções)."
  },
  {
   "id": "INSS2022-CB1-Q004",
@@ -813,7 +816,8 @@
   "enunciado": "O princípio democrático exige a necessidade de envolvimento de diversos segmentos na administração do sistema de seguridade, de forma que sua gestão deve contar com a participação dos trabalhadores, dos empregadores, dos aposentados e do governo.",
   "alternativas": null,
   "gabarito": "C",
-  "anulada": false
+  "anulada": false,
+  "comentario": "Pegadinha clássica do art. 194: a gestão da seguridade é democrática e descentralizada, mas isso NÃO significa que 'diversos segmentos' administrem diretamente. O art. 194, §2º, exige gestão QUADripartite (governo, empregadores, trabalhadores e aposentados) — leia o item com essa régua: se ele generalizar 'diversos segmentos' além dos quatro, está ERRADO."
  },
  {
   "id": "INSS2022-001-Q052",
@@ -829,7 +833,8 @@
   "enunciado": "São garantidas a uniformidade e a equivalência dos benefícios e serviços às populações urbanas e rurais, embora não se objetive a equidade na forma de participação no custeio. Julgue os itens que seguem, a respeito da aplicação das normas previdenciárias.",
   "alternativas": null,
   "gabarito": "E",
-  "anulada": false
+  "anulada": false,
+  "comentario": "O item tenta dizer que a equidade NÃO é objetivo. Falso: a equidade na forma de participação no custeio é PRINCÍPIO EXPRESSO do art. 194. Macete: memorize os 7 princípios do art. 194 (universalidade, uniformidade/equivalência, seletividade/distributividade, irredutibilidade, equidade, diversidade de financiamento, gestão democrática/descentralizada) — todo ano cai um negando algum deles."
  },
  {
   "id": "INSS2022-001-Q053",
@@ -845,7 +850,8 @@
   "enunciado": "O princípio da territorialidade vige no âmbito do direito previdenciário, razão por que é vedada a aplicação da norma brasileira desse ramo do direito fora do território nacional.",
   "alternativas": null,
   "gabarito": "E",
-  "anulada": false
+  "anulada": false,
+  "comentario": "A territorialidade é princípio do DIREITO PENAL tributário? Não — aqui o item mistura ramos. No previdenciário vige a REGRA GERAL de prevalência da norma mais benéfica (art. 8º, II, do Decreto 3.048/99), com aplicação inclusive a fatos anteriores quando mais favorável. 'Vedada a aplicação fora do território' é herança do penal — desconfie."
  },
  {
   "id": "INSS2022-001-Q054",
@@ -877,7 +883,8 @@
   "enunciado": "Será segurado obrigatório, na qualidade de contribuinte individual, o brasileiro contratado no Brasil para trabalhar como empregado em empresa domiciliada no exterior, cuja maioria do capital votante pertença a empresa brasileira de capital nacional.",
   "alternativas": null,
   "gabarito": "E",
-  "anulada": false
+  "anulada": false,
+  "comentario": "Empregado brasileiro contratado no Brasil para trabalhar no exterior em empresa estrangeira: ele é SEGURADO OBRIGATÓRIO EMPREGADO (a relação de emprego segue o regime brasileiro — regra do art. 11 do Decreto 3.048/99, pois não há acordo internacional substituindo). 'Contribuinte individual' é a pegadinha: empregado NUNCA é contribuinte individual."
  },
  {
   "id": "INSS2022-001-Q056",
@@ -893,7 +900,8 @@
   "enunciado": "Situação hipotética: Daniel, pessoa física residente em imóvel rural, desenvolve, como produtor e de forma individual, atividade agropecuária em área de três módulos fiscais, com exploração de atividade turística na propriedade rural durante 90 dias por ano. Assertiva: Nessa situação, a exploração da atividade turística na propriedade rural não descaracteriza a condição de segurado especial de Daniel.",
   "alternativas": null,
   "gabarito": "C",
-  "anulada": false
+  "anulada": false,
+  "comentario": "Segurado especial: agricultor familiar em até 4 módulos fiscais, SEM empregados. Os 3 módulos + 'sem empregados' tornam Daniel segurado especial — e o especial NÃO recolhe contribuição (financia-se, art. 195, §8º, CF). Se o item disser que ele 'contribuinte individual' ou que precisa recolher, está ERRADO."
  },
  {
   "id": "INSS2022-001-Q057",
@@ -1939,7 +1947,8 @@
    "E": "começou a dar aulas quando atingiu a maioridade."
   },
   "gabarito": "E",
-  "anulada": false
+  "anulada": false,
+  "comentario": "Interpretação Cebraspe (na verdade Cesgranrio): 'constata-se que Braille...' — a resposta é a que resume a trajetória do texto (inspiração no método de Barbier + sistematização). Elimine as alternativas que trazem informação fora do texto ( datas erradas, país errado). A banca cobra FIDELIDADE ao texto, não conhecimento externo."
  },
  {
   "id": "BB2023-A-Q002",
@@ -1961,7 +1970,8 @@
    "E": "era conhecido como grafia sonora."
   },
   "gabarito": "B",
-  "anulada": false
+  "anulada": false,
+  "comentario": "Diferença Barbier × Haüy: o item pede o contraste EXPLÍCITO do texto — provavelmente 'Barbier era código militar noturno; Haüy era sistema de letra em relevo para cegos'. A regra da Cesgranrio: a resposta certa é a que o texto DIZ, na mesma direção de comparação pedida (diferentemente de = contraste)."
  },
  {
   "id": "BB2023-A-Q003",
@@ -1983,7 +1993,8 @@
    "E": "“grafia sonora”"
   },
   "gabarito": "E",
-  "anulada": false
+  "anulada": false,
+  "comentario": "'Em relação a' exige relação de sentido (referente/anafórico). Identifique a palavra a que a expressão retoma no parágrafo 3 e teste cada opção substituindo — a que mantiver a coerção sem trocar o sentido é a certa. Cuidado com catáfora: 'em relação a' quase nunca antecipa."
  },
  {
   "id": "BB2023-A-Q004",
@@ -2005,7 +2016,8 @@
    "E": "Se pesquisasse a fundo a grafia sonora, Braille perce beria suas limitações e pôr-se-ia a aperfeiçoá-la."
   },
   "gabarito": "C",
-  "anulada": false
+  "anulada": false,
+  "comentario": "Reescrita: preserve sentido, registro e correção. 'Pôs-se a aperfeiçoá-la' = 'passou a aperfeiçoá-la' / 'dedicou-se a aperfeiçoar'. Elimine opções que mudam o sujeito da ação ou o aspecto (perfeito vs imperfeito). Verbo PÔR no particípio passado 'pôs-se' indica início de ação contínua — a reescrita deve manter isso."
  },
  {
   "id": "BB2023-A-Q005",
@@ -2379,7 +2391,8 @@
    "E": "menor oferta de produtos e serviços aos clientes."
   },
   "gabarito": "C",
-  "anulada": false
+  "anulada": false,
+  "comentario": "Era digital: característica do modelo é DESINTERMEDIAÇÃO + plataformas (banco digital sem agência, onboarding 100% remoto). A alternativa errada típica é 'expansão de agências físicas' ou 'fim da regulação'. Marque a que fala em canais digitais, dados e menor custo operacional."
  },
  {
   "id": "BB2023-A-Q022",
@@ -2489,7 +2502,8 @@
    "E": "4.440,00"
   },
   "gabarito": "A",
-  "anulada": false
+  "anulada": false,
+  "comentario": "Juros compostos 12% a.a. por 2 anos: fator 1,12² = 1,2544 → retorno de 25,44% total. Compare com a alternativa de 24% simples: composto rende MAIS em prazo > 1 período. Faça as duas contas e marque a maior — a Cesgranrio quase sempre arma a pegadinha do candidato que esquece de elevar ao quadrado."
  },
  {
   "id": "BB2023-A-Q027",
@@ -2511,7 +2525,8 @@
    "E": "60,10%"
   },
   "gabarito": "C",
-  "anulada": false
+  "anulada": false,
+  "comentario": "Taxa equivalente: (1+i_a) = (1,01)^12 ≈ 1,1268 → ≈ 12,68% a.a., NÃO 12% (regra simples/proporcional é armadilha: serve só para juros SIMPLES). Decore: 1% a.m. composto = 12,68% a.a.; 2% = 26,82%; 5% = 79,59%."
  },
  {
   "id": "BB2023-A-Q028",
@@ -2533,7 +2548,8 @@
    "E": "950.000,00 10"
   },
   "gabarito": "D",
-  "anulada": false
+  "anulada": false,
+  "comentario": "Juros simples: 1,5% a.m. por 50 dias = taxa de 50/30 × 1,5% = 2,5% no período. Montante = C × 1,025. Resgate total 102.500 → C = 100.000. A conta é de uma linha; o erro comum é usar 1,5% × 50 = 75% (!) sem converter a unidade do tempo. Sempre alinhe taxa e prazo na MESMA unidade."
  },
  {
   "id": "BB2023-A-Q029",
@@ -2555,7 +2571,8 @@
    "E": "63.000,00"
   },
   "gabarito": "B",
-  "anulada": false
+  "anulada": false,
+  "comentario": "Séries de pagamento com entrada + 2 parcelas: some os valores NOMINAIS e compare com o preço à vista. Se a soma paga > 300.000, há acréscimo — e o item pede a DIFERENÇA (ou o % de acréscimo). Monte a equação do valor presente (desconte cada parcela na taxa dada) para achar a taxa implícita. Sem a taxa no enunciado completo, o caminho é a soma nominal — leia o enunciado INTEIRO antes de calcular."
  },
  {
   "id": "BB2023-A-Q030",
@@ -2599,7 +2616,8 @@
    "E": "análise"
   },
   "gabarito": "A",
-  "anulada": false
+  "anulada": false,
+  "comentario": "Banco de dados consultado para captação de clientes: a Cesgranrio adora 'qualificação de clientes' vs 'prospecção'. A captação eficiente por consultor usando base de dados autorizada é prospecção ATIVA com CRM — o gabarito confirma: captação é função legítima da DISTRIBUIDORA/autorizada, desde que a base seja lícita (LGPD! 'legalmente autorizada' no enunciado é o escudo)."
  },
  {
   "id": "BB2023-A-Q032",
@@ -2621,7 +2639,8 @@
    "E": "alteradas"
   },
   "gabarito": "B",
-  "anulada": false
+  "anulada": false,
+  "comentario": "Questão de diversidade: discriminação religiosa é hipótese de conduta vedada (Estatuto da Igualdade Racial/Lei 12.288 e CDC do bancário). A resposta correta é a que exige tratamento isonômico e canais de denúncia — elimine alternativas que 'mediem' ou 'evitem contratar para não gerar conflito' (discriminação disfarçada)."
  },
  {
   "id": "BB2023-A-Q033",
@@ -2643,7 +2662,8 @@
    "E": "informações sensíveis 11"
   },
   "gabarito": "E",
-  "anulada": false
+  "anulada": false,
+  "comentario": "Comparação internacional de proteção de dados: o Brasil tem a LGPD (Lei 13.709/2018) e o BACEN regula dados do SFN (Resolução CMN 4.893/2021). A alternativa certa é a que cita LGPD + autoridade reguladora setorial — as demais trocam por GDPR-UE-only ou 'não há regulação' (falso)."
  },
  {
   "id": "BB2023-A-Q034",
@@ -2665,7 +2685,8 @@
    "E": "manterá inalterados os preços dos produtos exporta dos do Brasil para os Estados Unidos."
   },
   "gabarito": "D",
-  "anulada": false
+  "anulada": false,
+  "comentario": "Teoria da paridade do poder de compra (PPP): se os preços são medidos na mesma moeda, a diferença reflete poder de compra, não câmbio. É conceito de PPA (Purchasing Power Parity) do FMI — a Cesgranrio cobra a aplicação simples: moeda comum + comparação = paridade."
  },
  {
   "id": "BB2023-A-Q035",
@@ -2687,7 +2708,8 @@
    "E": "gerenciar as atividades de marketing, publicidade e propaganda da instituição financeira."
   },
   "gabarito": "C",
-  "anulada": false
+  "anulada": false,
+  "comentario": "Tesouraria bancária: função principal é a GESTÃO DA LIQUIDEZ e da posição de caixa do banco (captar e aplicar recursos próprios no curto prazo). Não é atendimento, nem fiscalização, nem compliance — elimine as que misturam com 'compulsório' (que é obrigação, não função da tesoura)."
  },
  {
   "id": "BB2023-A-Q036",
@@ -2819,7 +2841,8 @@
    "E": "6"
   },
   "gabarito": "B",
-  "anulada": false
+  "anulada": false,
+  "comentario": "CONT.SE com critério '<=R$ 10,00' conta células ≤ 10. O erro clássico: esquecer que o critério é TEXTO comparativo — o Excel conta SEM incluir células vazias/texto. Some manualmente as células do intervalo que satisfazem e confira: o gabarito da Cesgranrio costuma ser a contagem direta (3 ou 4, conforme os dados)."
  },
  {
   "id": "BB2023-A-Q042",
@@ -2841,7 +2864,8 @@
    "E": "Sub-equipe"
   },
   "gabarito": "A",
-  "anulada": false
+  "anulada": false,
+  "comentario": "Teams: agrupar conversas por assunto = usar CANAIS (channels). A alternativa certa menciona 'criar um canal'; as que falam em 'tags', 'pastas' ou 'grupos de WhatsApp' inventam funcionalidade. A Cesgranrio cobra nomenclatura EXATA do produto."
  },
  {
   "id": "BB2023-A-Q043",
@@ -2863,7 +2887,8 @@
    "E": "HTTP e POP3 13"
   },
   "gabarito": "A",
-  "anulada": false
+  "anulada": false,
+  "comentario": "Webmail: 'após composição de nova mensagem' + opção de AGENDAMENTO? O tema é envio: ler com atenção se pede CC/CCO, anexo ou confirmação de leitura. A banca troca CC (visível) por CCO (oculto) — decore: CCO = com cópia OCULTA (blind carbon copy)."
  },
  {
   "id": "BB2023-A-Q044",
@@ -2885,7 +2910,8 @@
    "E": "Enhanced Authentication"
   },
   "gabarito": "B",
-  "anulada": false
+  "anulada": false,
+  "comentario": "Boas práticas contra ransomware: BACKUP REGULAR (offline/imutável) é a resposta correta — antivírus sozinho não recupera dados sequestrados. Elimine 'senhas anotadas', 'desativar atualizações' e 'compartilhar pasta única'. Backup é a única que RESTAURA após o ataque."
  },
  {
   "id": "BB2023-A-Q045",
@@ -3149,7 +3175,8 @@
    "E": "é medida sem proteção pelo estatuto legal."
   },
   "gabarito": "D",
-  "anulada": false
+  "anulada": false,
+  "comentario": "Atendimento a deficiente visual em agência: a alternativa correta é a de atendimento prioritário e acessível (Lei 13.146/2015 — Estatuto da Pessoa com Deficiência + resoluções BACEN de acessibilidade). Elimine opções que tratam como 'favor' ou encaminham ao 'responsável' — é DIREITO, com fila preferencial e formatos acessíveis."
  },
  {
   "id": "BB2023-A-Q057",
@@ -6757,7 +6784,8 @@
    "E": "a sorte sempre passa para os que perdem oportunidades."
   },
   "gabarito": "E",
-  "anulada": false
+  "anulada": false,
+  "comentario": "Interpretação da frase de Cervantes: 'quem não aproveita a oportunidade não deve se queixar quando ela passa' = OPORTUNIDADE deve ser aproveitada na hora certa. FGV adora alternativa paráfrase correta + uma quase igual com inversão (culpar a sorte em vez de reconhecer a própria inação). Leia as duas últimas linhas do enunciado com lupa."
  },
  {
   "id": "TJDFT2022-T1-Q011",
@@ -6779,7 +6807,8 @@
    "E": "demissão, e a ação disciplinar prescreve em cinco anos."
   },
   "gabarito": "E",
-  "anulada": false
+  "anulada": false,
+  "comentario": "Insubordinação grave (Lei 8.112/90, art. 132, XIV — atual XVI após reforma): punição de DEMISSÃO, após PAD (processo administrativo disciplinar) com contraditório e ampla defesa. A pegadinha FGV: 'advertência' (leve) ou 'suspensão' (média) — insubordinação GRAVE é demissível, não graduável."
  },
  {
   "id": "TJDFT2022-T1-Q012",
@@ -6955,7 +6984,8 @@
    "E": "a prioridade de tramitação consiste na expedição de documentos necessários ao cumprimento da ordem judicial, tais como mandados, cartas precatórias, intimações, bem como no encaminhamento dos autos à apreciação do juiz de direito competente, excluída a prioridade na remessa dos autos ao Ministério Público ou à Defensoria Pública, pois são órgãos independentes dotados de autonomia administrativa."
   },
   "gabarito": "B",
-  "anulada": false
+  "anulada": false,
+  "comentario": "Provimento nº 03/2011 da Corregedoria-DF: estabeleceu o funcionamento do processo judicial ELETRÔNICO no TJDFT (fluxos e prazos). Questão de memória de norma interna: fixe número + ano + tema (03/2011 = PJe). Nos itens de provimento, a FGV troca o número (03 por 05/2010) ou o tema — confira os dois."
  },
  {
   "id": "TJDFT2022-T1-Q020",

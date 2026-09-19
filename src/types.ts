@@ -15,6 +15,7 @@ export interface Questao {
   alternativas: Record<string, string> | null; // null p/ certo_errado
   gabarito: string | null;                     // null se anulada
   anulada: boolean;
+  comentario?: string;                         // questão comentada (recurso 9)
 }
 
 export type Modulo = 'inicio' | 'trilha' | 'cronograma' | 'conteudo' | 'banco' | 'ia' | 'simulado' | 'redacao' | 'tutor' | 'desempenho';
@@ -47,6 +48,9 @@ export interface Progresso {
   srs: Record<string, { due: string; intervalo: number }>; // fila de revisão espaçada
   diagnostico: { feito: boolean; quando: number; fracas: string[] } | null;
   ultimoBackup: number;
+  anotSecoes: Record<string, string>;        // seçãoId -> nota
+  destaques: Record<string, string[]>;       // seçãoId -> trechos marcados
+  flash: Record<string, { due: string; intervalo: number; ts: number }>; // flashcards do conteúdo
 }
 
 export interface Perfil { id: string; nome: string; criadoEm: number; }
