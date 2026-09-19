@@ -64,20 +64,25 @@ def fluxo(pdf, min_size=8.5):
             parts.sort()
             texto = re.sub(r"\s+", " ", " ".join(p[1] for p in parts).replace("\xad", "")).strip()
             ini_num = bool(re.fullmatch(r"\d{1,3}", parts[0][4]))
-            out.append((texto, any(p[2] for p in parts), parts[0][0], parts[0][3], ini_num))
+            out.append((texto, any(p[2] for p in parts), parts[0][0], parts[0][3], ini_num, y))
     d.close()
-    return [l for l in out if l[0] and not re.fullmatch(r"[ _]+", l[0])]
+    BOILER_LINHAS = {
+        'CEBRASPE – INSS – Edital: 2022', 'CADERNO DE PROVAS OBJETIVAS',
+        'CARGO: TÉCNICO DO SEGURO SOCIAL', 'Aplicação: 27/11/2022',
+        'TÉCNICO DO SEGURO SOCIAL', 'TARDE', 'Espaço livre', 'Espaço reservado',
+    }
+    return [l for l in out if l[0] and not re.fullmatch(r"[ _]+", l[0]) and l[0] not in BOILER_LINHAS]
 
 
 # regras de âncora por banca (numeração oficial)
-REGRA_CEBRASPE = lambda txt, b, x, s, ini: ini and 8.5 <= s <= 9.6 and (x < 45 or 295 < x < 325)
-REGRA_FGV = lambda txt, b, x, s, ini: ini and b and 8.5 <= s <= 9.6
-REGRA_CESGRANRIO = lambda txt, b, x, s, ini: ini and b and 9.4 <= s <= 12 and not (288 <= x <= 300)
+REGRA_CEBRASPE = lambda txt, b, x, s, ini, y: ini and 8.5 <= s <= 9.6 and (x < 45 or 295 < x < 325)
+REGRA_FGV = lambda txt, b, x, s, ini, y: ini and b and 8.5 <= s <= 9.6
+REGRA_CESGRANRIO = lambda txt, b, x, s, ini, y: ini and b and 9.4 <= s <= 12 and not (288 <= x <= 300)
 
 
 def achar_anchors(linhas, regra, n0, n1):
     """Subsequência n0..n1 de números oficiais (pode estar colado: '10No início...')."""
-    cand = [i for i, (txt, b, x, s, ini) in enumerate(linhas) if ini and regra(txt, b, x, s, ini)]
+    cand = [i for i, (txt, b, x, s, ini, y) in enumerate(linhas) if ini and regra(txt, b, x, s, ini, y)]
     anchors, pos = {}, -1
     for n in range(n0, n1 + 1):
         achou = next((i for i in cand if i > pos and linhas[i][0].startswith(str(n))), None)
@@ -139,7 +144,7 @@ BOILER = ("CADERNO DE PROVAS", "CONCURSO PÚBLICO")
 def parse(linhas, anchors, gabs, prefixo, concurso, prova, ano, banca,
           tipo, fix_disc=None, com_textos=False, parar=("REDAÇÃO", "FIM DA PROVA")):
     questoes, header, puladas = [], "GERAL", []
-    ctx_marcadores = {i: txt for i, (txt, b, x, s, ini) in enumerate(linhas) if com_textos and txt.startswith("Texto ")}
+    ctx_marcadores = {i: txt for i, (txt, b, x, s, ini, y) in enumerate(linhas) if com_textos and txt.startswith("Texto ")}
     ctx_atual = None
     ns = sorted(anchors)
     # header vigente antes da primeira questão (ex.: "CONHECIMENTOS BÁSICOS")
@@ -154,8 +159,21 @@ def parse(linhas, anchors, gabs, prefixo, concurso, prova, ano, banca,
         for mi, mt in ctx_marcadores.items():
             if ini < mi < fim:
                 ctx_atual = mt
+        # padrão Cebraspe: a 1ª linha do item fica ACIMA do número e a 1ª linha do item
+        # SEGUINTE fica ABAIXO do último texto do item (âncora = número, y ~1px deslocado)
+        ini_corpo = ini
+        fim_corpo = fim
+        if tipo == "certo_errado":
+            if ini > 0:
+                prev = linhas[ini - 1]
+                if (not prev[4]) and (abs(prev[5] - linhas[ini][5]) <= 4) and not prev[0].startswith("Texto "):
+                    ini_corpo = ini - 1
+            if fim < len(linhas):
+                ult = linhas[fim - 1]
+                if (not ult[4]) and (abs(ult[5] - linhas[fim][5]) <= 4) and not ult[0].startswith("Texto "):
+                    fim_corpo = fim - 1
         corpo = []
-        for i in range(ini, fim):
+        for i in range(ini_corpo, fim_corpo):
             txt = linhas[i][0]
             if i == ini:
                 txt = re.sub(r"^\d{1,3}\s*", "", txt).strip()  # restante da linha-âncora
@@ -163,6 +181,9 @@ def parse(linhas, anchors, gabs, prefixo, concurso, prova, ano, banca,
                     continue
             corpo.append((txt, linhas[i][1]))
         corpo = [(txt, b) for txt, b in corpo if not (com_textos and txt.startswith("Texto "))]
+        if tipo == "certo_errado":
+            corpo = [(txt, b) for txt, b in corpo if not re.fullmatch(r"\d{1,3}(\s+\d{1,3})*", txt)]
+            corpo = [(txt, b) for txt, b in corpo if not re.match(r"(?i)^\s*julgue os itens", txt)]
         corte = next((i for i, (txt, b) in enumerate(corpo)
                       if b and eh_header(txt) and any(p in txt for p in parar)), None)
         if corte is not None:
@@ -191,8 +212,19 @@ def parse(linhas, anchors, gabs, prefixo, concurso, prova, ano, banca,
                 segs2[-1] = ("H", segs2[-1][1] + " " + texto)
             else:
                 segs2.append((letra, texto))
-        enun, alts, cur = [], {}, None
+        COMANDO_RE = re.compile(r"(?i)\s*julgue os itens[^.]*")
+        comando_partes = []
+        segs3 = []
         for letra, texto in segs2:
+            m = COMANDO_RE.search(texto)
+            if m:
+                comando_partes.append(m.group(0).strip())
+                texto = COMANDO_RE.sub("", texto).strip()
+            if texto or letra:
+                segs3.append((letra, texto))
+        comando = " ".join(comando_partes) or None
+        enun, alts, cur = [], {}, None
+        for letra, texto in segs3:
             if letra == "H":
                 header = texto
                 cur = None
@@ -212,12 +244,21 @@ def parse(linhas, anchors, gabs, prefixo, concurso, prova, ano, banca,
         if tipo == "multipla_escolha" and len(alts) < 2:
             puladas.append(n)
             continue
+        if tipo == "certo_errado":
+            enun_str = " ".join(enun).strip()
+            mm = re.search(r"(?i)\s*julgue os[^.]{0,40}itens[^.]*\.?", enun_str)
+            if mm:
+                if not comando:
+                    comando = mm.group(0).strip()
+                enun_str = re.sub(r"\s+", " ", (enun_str[: mm.start()] + " " + enun_str[mm.end():]).strip())
+        else:
+            enun_str = " ".join(enun).strip()
         g = gabs.get(n)
         questoes.append({
             "id": f"{prefixo}-Q{n:03d}", "concurso": concurso, "banca": banca, "ano": ano,
             "prova": prova, "numero": n, "disciplina": fix_disc(n) if fix_disc else header,
-            "comando": None, "contexto": ctx_atual if com_textos else None, "tipo": tipo,
-            "enunciado": " ".join(enun).strip(), "alternativas": alts or None,
+            "comando": comando, "contexto": ctx_atual if com_textos else None, "tipo": tipo,
+            "enunciado": enun_str, "alternativas": alts or None,
             "gabarito": None if g in ("X", "*", None) else g, "anulada": g in ("X", "*"),
         })
     return questoes, puladas
